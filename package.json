@@ -18,5 +18,8 @@
     },
     "optionalDependencies": {
         "@laravel/multiplex": "^0.4.1"
+    },
+    "dependencies": {
+        "bootstrap-icons": "^1.13.1"
     }
 }

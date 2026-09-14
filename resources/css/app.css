@@ -1,3 +1,37 @@
 @import 'bootstrap/dist/css/bootstrap.min.css';
+@import "bootstrap-icons/font/bootstrap-icons.css";
 
 /* Add any custom style */
+
+/*======= UTILS =======*/
+
+
+
+/*===== HEADER ======*/
+
+.glass-navbar {
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+}
+
+.navbar-logo {
+    height: 50px;
+}
+
+/*== Resource Card in Home ==*/
+
+.page-access-card {
+    color: #03255bd3;
+}
+
+.head-container .icon {
+    color: #93C5FD;
+    font-size: 26px;
+}
+
+.page-access-card .btn {
+    background-color: #93C5FD;
+    font-size: larger;
+}
