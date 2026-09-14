@@ -9,7 +9,7 @@
     {{-- import @vite --}}
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-    <link rel="icon" type="image/svg" href="{{ asset('images/logos/bloom-logo.svg') }}">
+    <link rel="icon" type="image/svg" href="{{ Vite::asset('resources/images/logos/bloom-logo.svg') }}">
 
     
 
