@@ -1,4 +1,5 @@
 @import 'bootstrap/dist/css/bootstrap.min.css';
+@import "bootstrap-icons/font/bootstrap-icons.css";
 
 /* Add any custom style */
 
@@ -19,4 +20,18 @@
     height: 50px;
 }
 
-/*===== FOOTER ======*/
+/*== Resource Card in Home ==*/
+
+.page-access-card {
+    color: #03255bd3;
+}
+
+.head-container .icon {
+    color: #93C5FD;
+    font-size: 26px;
+}
+
+.page-access-card .btn {
+    background-color: #93C5FD;
+    font-size: larger;
+}
