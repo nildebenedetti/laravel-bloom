@@ -5,7 +5,9 @@
     <meta name>
 
     {{-- import @vite --}}
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    <link rel="icon" type="image/svg" href="{{ Vite::asset('resources/images/logos/bloom-logo.svg') }}">
 
     <title>Records</title>
 
