@@ -1,9 +1,9 @@
-@extends("layouts.master")
+@extends("layouts.app")
 
-@section("title", "Homepage")
+@section("title", "Dashboard")
 
 @section("content")
-    <div class="page-header container py-4">
+    <div class="page-header container py-4 text-secondary">
         <h2>Welcome in the backoffice!</h2>
         <h5 class="pt-2">Behind the scenes, where the magic takes place...</h5>
         <p class="text-muted pt-3">
@@ -60,13 +60,7 @@
                 <x-slot:description>How the achievement makes the User feel
                 </x-slot:description>
             </x-page-access-card>
-
-
-
         </div>
-
-
-
     </div>
     
 @endsection
