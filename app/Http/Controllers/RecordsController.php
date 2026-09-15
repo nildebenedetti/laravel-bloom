@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Record;
 use Illuminate\Http\Request;
 
 class RecordsController extends Controller
@@ -11,7 +12,9 @@ class RecordsController extends Controller
      */
     public function index()
     {
-        return 'ciao sono nella index di controller';
+        $records = Record::all();
+
+        return view("records.index", compact("records"));
     }
 
     /**
