@@ -1,5 +1,5 @@
 <header>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary GLASS-NAVBAR">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary glass-navbar">
         <div class="container">
             <a class="navbar-brand" href="{{ url('/') }}">
                 <img class="navbar-logo" src="{{ Vite::asset('resources/images/logos/bloom-logo.svg') }}" alt="Bloom logo">
