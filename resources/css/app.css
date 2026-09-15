@@ -4,7 +4,9 @@
 /* Add any custom style */
 
 /*======= UTILS =======*/
-
+.bg-light-blue {
+    background-color: #93C5FD;
+}
 
 
 /*===== HEADER ======*/
