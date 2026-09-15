@@ -25,12 +25,12 @@
                 </x-slot:description>
             </x-page-access-card>
             <!-- Records -->
-            <x-page-access-card>
+            <x-page-access-card :route="route('records.index')">
                 <x-slot:icon>
                     <i class="bi bi-journal-richtext"></i>
                 </x-slot:icon>
                 <x-slot:title>Records</x-slot:title>
-                <x-slot:description>The achievements of our users.
+                <x-slot:description>The achievements of our users
                 </x-slot:description>
             </x-page-access-card>
             <!-- Categories -->

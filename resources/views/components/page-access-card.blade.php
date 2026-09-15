@@ -1,4 +1,6 @@
 
+@props(['route' => '#'])
+
 <div class="col">
     <div class="page-access-card card h-100 shadow-sm">
         <div class="card-body">
@@ -9,9 +11,9 @@
             <h5 class="card-title">{{ $title }}</h5>
             </div>
             
-            <p class="card-text">{{ $description }}.</p>
+            <p class="card-text">{{ $description }}</p>
             <div class="wrapper d-flex justify-content-end">
-                <a href="#" class="btn bg-light-blue">
+                <a href="{{ $route }}" class="btn bg-light-blue">
                     <i class="bi bi-arrow-right-short"></i>
                 </a>
             </div>
