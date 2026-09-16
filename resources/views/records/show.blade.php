@@ -4,12 +4,25 @@
 
 @section('content')
 
-<!-- Back to All btn-->
-<div class="btn-wrapper container d-flex justify-content-start">
-    <a href="{{ route('records.index') }}" class="btn bg-light-blue mt-3 text-secondary">
-        Back to All Records
-    </a>
+
+<div class="btns-wrapper container d-flex justify-content-between">
+    <!-- Back to All btn-->
+    <div class="btn-wrapper d-flex justify-content-start">
+        <a href="{{ route('records.index') }}" class="btn bg-light-blue mt-3 text-secondary">
+            Back to All Records
+        </a>
+    </div>
+    <!-- Resource Interaction Btns-->
+    <div class="btn-wrapper px-5 d-flex justify-content-end gap-3">
+        <a href="{{ route('records.edit', $record ) }}" class="btn bg-warning mt-3 text-light">
+            Edit
+        </a>
+        <a href="#" class="btn bg-danger mt-3 text-light">
+            Delete
+        </a>
+    </div>
 </div>
+
 
 <div class="page-title-wrapper container pt-4 text-capitalize d-flex flex-column">
     <h4 class="page-title text-secondary">
@@ -22,7 +35,7 @@
 <!-- Image -->
 @if($record->image_path)
 <div class="container">
-    <img src="{{ asset('storage/' . $record->image_path) }}" alt="{{$record->title}}" class="w-75 image-fluid image-cover">
+    <img src="{{ asset('storage/' . $record->image_path) }}" alt="{{$record->image_alt}}" class="w-75 img-fluid">
 </div>
 @endif
 <!-- Description 
