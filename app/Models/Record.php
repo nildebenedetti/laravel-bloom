@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\RecordVisibility;
+use App\Models\Category;
 use Illuminate\Database\Eloquent\Model;
 
 class Record extends Model
@@ -15,6 +16,10 @@ class Record extends Model
             'iamge_alt',
             'visibility'
         ];
+
+    public function category() {
+        $this->belongsTo(Category::class);
+    }
     // Automatically transforms raw database values into typed PHP objects
     // (e.g., Enums and Carbon dates).
     // Ensures strict type safety and seamless data conversion 
