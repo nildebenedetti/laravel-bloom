@@ -5,21 +5,21 @@
 @section('content')
 
 
-<div class="btns-wrapper container d-flex justify-content-between">
+<div class="btns-wrapper container d-flex justify-content-between mt-3">
     <!-- Back to All btn-->
     <div class="btn-wrapper d-flex justify-content-start">
-        <a href="{{ route('records.index') }}" class="btn bg-light-blue mt-3 text-secondary">
+        <a href="{{ route('records.index') }}" class="btn bg-light-blue text-secondary">
             Back to All Records
         </a>
     </div>
     <!-- Resource Interaction Btns-->
-    <div class="btn-wrapper px-5 d-flex justify-content-end gap-3">
-        <a href="{{ route('records.edit', $record ) }}" class="btn bg-warning mt-3 text-light">
+    <div class="btn-wrapper px-5 d-flex justify-content-end align-items-center gap-3">
+        <a href="{{ route('records.edit', $record ) }}" class="btn btn-outline-warning">
             Edit
         </a>
-        <a href="#" class="btn bg-danger mt-3 text-light">
+        <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal-{{ $record->id }}">
             Delete
-        </a>
+        </button>
     </div>
 </div>
 
@@ -45,6 +45,37 @@
 -->
 <div class="container text-justify">
     <p>{!! nl2br(e($record->description)) !!}</p>
+</div>
+
+<!-- Modal for delete-->
+
+<div class="modal fade" id="deleteModal-{{ $record->id }}" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel-{{ $record->id }}">Delete Records</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body">
+                Do you wish to proceed with deletion of Project <strong>"{{ $record->title }}"</strong>?
+            </div>
+
+            <div class="modal-footer">
+                {{-- Cancel btn --}}
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+
+                {{-- Form for effective delete --}}
+                <form action="{{ route('records.destroy', $record) }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger">Delete permanently</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
 </div>
 
 @endsection

@@ -124,8 +124,16 @@ class RecordController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Record $record)
     {
-        //
+        if($record->image) {
+            
+            Storage::delete($record->image_path);
+        }
+        
+
+        $record->delete();
+
+        return redirect()->route('records.index');
     }
 }
