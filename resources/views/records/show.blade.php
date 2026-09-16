@@ -27,6 +27,7 @@
         {{ $record->title }}
     </h4>
 <!-- Category-->
+<p class="fs-5 text-muted">{{ $record->category->name}}</p>
 
 <!--- Emotion Pills-->
 </div>
@@ -41,7 +42,7 @@
     - e(): Escapes special characters to prevent XSS vulnerabilities.
     - nl2br(): Converts newline characters into HTML <br> tags.
 -->
-<div class="container text-justify">
+<div class="container text-justify fst-italic">
     <p>{!! nl2br(e($record->description)) !!}</p>
 </div>
 

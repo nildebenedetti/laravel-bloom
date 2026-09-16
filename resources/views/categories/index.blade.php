@@ -12,7 +12,7 @@
     </div>
     <!-- Resource Interaction Btns-->
     <div class="btn-wrapper px-5 d-flex justify-content-end align-items-center">
-        <a href="#" class="btn btn-outline-success">
+        <a href="{{ route('categories.create') }}" class="btn btn-outline-success">
             Add New
         </a>
     </div>
