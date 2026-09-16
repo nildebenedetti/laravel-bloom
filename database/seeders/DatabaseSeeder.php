@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use Database\Seeders\CategoriesTableSeeder;
 use Database\Seeders\RecordsTableSeeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -25,6 +26,7 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         $this->call([
+            CategoriesTableSeeder::class,
             RecordsTableSeeder::class
         ]);
     }
