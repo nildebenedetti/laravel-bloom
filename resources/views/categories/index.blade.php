@@ -32,7 +32,7 @@
                 <td>{{ $category->name }}</td>
                 <td>{{ $category->description }}</td>
                 <td>
-                    <a href="#" class="action-btn btn btn-outline-info"><i class="bi bi-arrow-right"></i></a> 
+                    <a href="{{ route('categories.show', $category)}}" class="action-btn btn btn-outline-info"><i class="bi bi-arrow-right"></i></a> 
                         <a href="#" class="action-btn btn btn-outline-warning"><i class="bi bi-pencil-fill"></i></a>
                         <button type="button" class="btn btn-outline-danger">
                                 <i class="bi bi-trash3-fill"></i>

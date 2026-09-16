@@ -22,8 +22,6 @@
         </button>
     </div>
 </div>
-
-
 <div class="page-title-wrapper container pt-4 text-capitalize d-flex flex-column">
     <h4 class="page-title text-secondary">
         {{ $record->title }}
