@@ -7,7 +7,7 @@
             <!-- add pills for emotions somewhere here -->
             <!-- add user name -->
             <!-- Category-->
-            <p class="card-subtitle">category</p>
+            <p class="card-subtitle">{{ $record->category->name  }}</p>
             <div class="btn-wrapper d-flex justify-content-end">
                 <a href="{{ route('records.show', $record) }}" class="btn bg-light-blue mt-3">
                     <i class="bi bi-arrow-right-short"></i>

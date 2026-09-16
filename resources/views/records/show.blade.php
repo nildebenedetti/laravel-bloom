@@ -22,13 +22,12 @@
         </button>
     </div>
 </div>
-
-
 <div class="page-title-wrapper container pt-4 text-capitalize d-flex flex-column">
     <h4 class="page-title text-secondary">
         {{ $record->title }}
     </h4>
 <!-- Category-->
+<p class="fs-5 text-muted">{{ $record->category->name}}</p>
 
 <!--- Emotion Pills-->
 </div>
@@ -43,7 +42,7 @@
     - e(): Escapes special characters to prevent XSS vulnerabilities.
     - nl2br(): Converts newline characters into HTML <br> tags.
 -->
-<div class="container text-justify">
+<div class="container text-justify fst-italic">
     <p>{!! nl2br(e($record->description)) !!}</p>
 </div>
 
@@ -59,7 +58,7 @@
             </div>
 
             <div class="modal-body">
-                Do you wish to proceed with deletion of Project <strong>"{{ $record->title }}"</strong>?
+                Do you wish to proceed with deletion of Record <strong>"{{ $record->title }}"</strong>?
             </div>
 
             <div class="modal-footer">

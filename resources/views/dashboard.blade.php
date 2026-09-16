@@ -34,7 +34,7 @@
                 </x-slot:description>
             </x-page-access-card>
             <!-- Categories -->
-            <x-page-access-card>
+            <x-page-access-card :route="route('categories.index')">
                 <x-slot:icon>
                     <i class="bi bi-tag"></i>
                 </x-slot:icon>
