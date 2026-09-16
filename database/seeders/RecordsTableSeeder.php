@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\Record;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Faker\Generator as Faker;
 
@@ -23,6 +22,7 @@ class RecordsTableSeeder extends Seeder
             $newRecord->date = $faker->dateTimeBetween('-1 year', 'now')->format('Y-m-d');
             // omitted image_path
             $newRecord->visibility = $coin === 0 ? 'public' : 'private';
+            $newRecord->category_id = rand(1, 12);
 
             $newRecord->save();
         }

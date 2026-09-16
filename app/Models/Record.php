@@ -18,7 +18,7 @@ class Record extends Model
         ];
 
     public function category() {
-        $this->belongsTo(Category::class);
+        return $this->belongsTo(Category::class);
     }
     // Automatically transforms raw database values into typed PHP objects
     // (e.g., Enums and Carbon dates).
