@@ -33,10 +33,10 @@
                 <td>{{ $category->description }}</td>
                 <td>
                     <a href="{{ route('categories.show', $category)}}" class="action-btn btn btn-outline-info"><i class="bi bi-arrow-right"></i></a> 
-                        <a href="#" class="action-btn btn btn-outline-warning"><i class="bi bi-pencil-fill"></i></a>
-                        <button type="button" class="btn btn-outline-danger">
-                                <i class="bi bi-trash3-fill"></i>
-                        </button>   
+                        <a href="{{ route('categories.edit', $category) }}" class="action-btn btn btn-outline-warning"><i class="bi bi-pencil-fill"></i></a>
+                        <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal-{{ $category->id }}">
+                        Delete
+                        </button>
                 </td>
             </tr>
         
@@ -44,5 +44,34 @@
         </tbody>
     </table>
 </div>
+
+<!-- Modal for delete-->
+<div class="modal fade" id="deleteModal-{{ $category->id }}" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel-{{ $category->id }}">Delete Category</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                Do you wish to proceed with deletion of Category <strong>"{{ $category->name }}"</strong>?
+            </div>
+
+            <div class="modal-footer">
+                {{-- Cancel btn --}}
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+
+                {{-- Form for effective delete --}}
+                <form action="{{ route('categories.destroy', $category->id) }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger">Delete permanently</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
 
 @endsection

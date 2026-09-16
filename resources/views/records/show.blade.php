@@ -58,7 +58,7 @@
             </div>
 
             <div class="modal-body">
-                Do you wish to proceed with deletion of Project <strong>"{{ $record->title }}"</strong>?
+                Do you wish to proceed with deletion of Record <strong>"{{ $record->title }}"</strong>?
             </div>
 
             <div class="modal-footer">
