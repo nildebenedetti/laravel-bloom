@@ -1,7 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\RecordController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\RecordsController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -18,7 +18,7 @@ Route::get('/dashboard', function () {
 
 Route::middleware('auth', 'verified')->group( function () {
 
-    Route::resource('/records', RecordsController::class);
+    Route::resource('/records', RecordController::class);
 
 });
 

@@ -3,10 +3,16 @@
 @section('title', 'All Records')
 
 @section('content')
-<!-- Back to All btn-->
+    <!-- Back to All btn-->
     <div class="btn-wrapper px-5 d-flex justify-content-start">
-        <a href="{{ route('dashboard') }}" class="btn bg-light-blue mt-3 text-secondary">
+        <a href="{{ route('dashboard') }}" class="btn bg-light-blue mt-3 text-dark">
             Back to Dashboard
+        </a>
+    </div>
+    <!-- Resource Interaction Btns-->
+    <div class="btn-wrapper px-5 d-flex justify-content-end">
+        <a href="{{ route('records.create') }}" class="btn bg-success mt-3 text-light">
+            Add New
         </a>
     </div>
     <div class="container py-5">

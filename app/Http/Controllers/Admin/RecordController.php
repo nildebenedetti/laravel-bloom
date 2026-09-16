@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Record;
 use Illuminate\Http\Request;
 
-class RecordsController extends Controller
+class RecordController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -23,7 +23,7 @@ class RecordsController extends Controller
      */
     public function create()
     {
-        //
+        return view("records.create");
     }
 
     /**
@@ -31,7 +31,12 @@ class RecordsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $newRecord = new Record();
+
+        $newRecord->title = $request['title'];
+        $newRecord->description = $request['description'];
+        $newRecord->date = $request['date'];
+
     }
 
     /**
