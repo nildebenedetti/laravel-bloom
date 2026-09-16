@@ -36,6 +36,11 @@ class RecordController extends Controller
         $newRecord->title = $request['title'];
         $newRecord->description = $request['description'];
         $newRecord->date = $request['date'];
+        $newRecord->visibility = $request['visibility'];
+
+        $newRecord->save();
+
+        return redirect()->route('records.show', $newRecord);
 
     }
 

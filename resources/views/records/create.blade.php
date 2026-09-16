@@ -4,7 +4,7 @@
 
 @section("content")
     <div class="container form-container p-4">
-    <form action="#}" method="POST" class="py-4" enctype="multipart/form-data">
+    <form action="{{ route('records.store') }}" method="POST" class="py-4" enctype="multipart/form-data">
         @csrf {{-- security token for Cross-Site Request Forgery --}}
         <div class="row d-flex justify-content-center">
             <!-- title -->
@@ -34,12 +34,15 @@
                 <textarea required id="description" name="description" rows="10" ></textarea>
             </div>
             <!-- Visibility-->
-            <!-- <div class="col col-sm-12 d-flex flex-column align-items-end">
-                <label for="visibility"></label>
-                <select name="visibility" id="visibility">
-                    
-
-                </select> -->
+            <div class="col col-sm-12 col-md-12 col-lg-12 d-flex flex-column py-3">
+                    <select name="visibility" id="visibility">
+                    @foreach(\App\Enums\RecordVisibility::cases() as $visibility)
+                    <option 
+                        value="{{ $visibility->value }}">
+                        {{ $visibility->label() }}
+                    </option>
+                    @endforeach
+                </select>
             </div>
         </div>
         <div class="btn-wrapper d-flex justify-content-end pt-4">
