@@ -11,9 +11,12 @@
         </a>
     </div>
     <!-- Resource Interaction Btns-->
-    <div class="btn-wrapper px-5 d-flex justify-content-end align-items-center">
-        <a href="#" class="btn btn-outline-success">
-        Add New
+    <div class="btn-wrapper px-5 d-flex justify-content-end align-items-center gap-3">
+        <a href="{{ route('categories.edit', $category) }}" class="btn btn-outline-warning">
+        Edit
+        </a>
+        <a href="{{ route('categories.create')}}" class="btn btn-outline-danger">
+        Delete
         </a>
     </div>
 </div>
