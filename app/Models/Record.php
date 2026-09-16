@@ -12,8 +12,8 @@ class Record extends Model
             'title',
             'description',
             'date',
-            'iamge_path',
-            'iamge_alt',
+            'image_path',
+            'image_alt',
             'visibility'
         ];
 
