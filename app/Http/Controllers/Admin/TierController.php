@@ -38,7 +38,7 @@ class TierController extends Controller
      */
     public function show(Tier $tier)
     {
-        //
+        return view('tiers.show', compact('tier'));
     }
 
     /**
