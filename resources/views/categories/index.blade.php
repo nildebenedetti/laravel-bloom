@@ -3,7 +3,7 @@
 @section('title', 'All Categories')
 
 @section('content')
-    <div class="btns-wrapper container d-flex justify-content-between mt-3">
+<div class="btns-wrapper container d-flex justify-content-between mt-3">
     <!-- Back to All btn-->
     <div class="btn-wrapper d-flex justify-content-start">
         <a href="{{ route('dashboard') }}" class="btn bg-light-blue text-secondary">

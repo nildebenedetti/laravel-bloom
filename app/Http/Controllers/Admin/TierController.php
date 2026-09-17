@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Tier;
 use Illuminate\Http\Request;
 
@@ -12,7 +13,8 @@ class TierController extends Controller
      */
     public function index()
     {
-        //
+        $tiers = Tier::all();
+        return view('tiers.index', compact('tiers'));
     }
 
     /**

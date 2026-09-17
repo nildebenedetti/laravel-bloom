@@ -43,7 +43,7 @@
                 </x-slot:description>
             </x-page-access-card>
             <!-- Tiers -->
-            <x-page-access-card>
+            <x-page-access-card :route="route('tiers.index')">
                 <x-slot:icon>
                     <i class="bi bi-trophy"></i>
                 </x-slot:icon>
