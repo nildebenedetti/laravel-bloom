@@ -75,6 +75,8 @@ class TierController extends Controller
      */
     public function destroy(Tier $tier)
     {
-        //
+        $tier->delete();
+
+        return redirect()->route('tiers.index');
     }
 }

@@ -15,7 +15,7 @@
         <a href="{{ route('tiers.edit', $tier)}}" class="btn btn-outline-warning">
         Edit
         </a>
-        <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#">
+        <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal-{{ $tier->id }}">
         Delete
         </button>
     </div>
@@ -48,7 +48,7 @@
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
 
                 {{-- Form for effective delete --}}
-                <form action="" method="POST">
+                <form action="{{ route('tiers.destroy', $tier->id) }}" method="POST">
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn btn-danger">Delete permanently</button>
