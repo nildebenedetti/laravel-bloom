@@ -4,6 +4,12 @@
 
 @section("content")
     <div class="container form-container p-4">
+            <!-- Back to resource-->
+    <div class="btn-wrapper d-flex justify-content-start">
+        <a href="{{ route('records.show', $tier) }}" class="btn bg-light-blue text-secondary">
+        Back to <b>{{ $record->name }}</b>
+        </a>
+    </div>
     <form action="{{ route('records.update', $record ) }}" method="POST" class="py-4" enctype="multipart/form-data">
         @csrf {{-- security token for Cross-Site Request Forgery --}}
         @method('PUT') {{-- METHOD DIRECTIVE --}}

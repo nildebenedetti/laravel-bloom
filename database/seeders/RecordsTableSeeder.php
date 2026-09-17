@@ -23,6 +23,7 @@ class RecordsTableSeeder extends Seeder
             // omitted image_path
             $newRecord->visibility = $coin === 0 ? 'public' : 'private';
             $newRecord->category_id = rand(1, 12);
+            $newRecord->tier_id = rand(1, 4);
 
             $newRecord->save();
         }

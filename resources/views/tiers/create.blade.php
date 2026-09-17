@@ -1,17 +1,17 @@
-@extends('layouts.categories')
+@extends('layouts.tiers')
 
-@section('title', 'Add a New Category')
+@section('title', 'Add a New Tier')
 
 @section('content')
 
 <div class="container form-container p-4">
     <!-- Back to All btn-->
     <div class="btn-wrapper d-flex justify-content-start">
-        <a href="{{ route('categories.index') }}" class="btn bg-light-blue text-secondary">
+        <a href="{{ route('tiers.index') }}" class="btn bg-light-blue text-secondary">
         Back to All
         </a>
     </div>
-    <form action="{{ route('categories.store') }}" method="POST" class="py-4" enctype="multipart/form-data">
+    <form action="{{ route('tiers.store') }}" method="POST" class="py-4" enctype="multipart/form-data">
         @csrf {{-- security token for Cross-Site Request Forgery --}}
         <div class="row d-flex justify-content-center">
             <!-- name -->
