@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
 use Database\Seeders\CategoriesTableSeeder;
+use Database\Seeders\EmotionsTableSeeder;
 use Database\Seeders\RecordsTableSeeder;
 use Database\Seeders\TiersTableSeeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -29,7 +29,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             CategoriesTableSeeder::class,
             TiersTableSeeder::class,
-            RecordsTableSeeder::class
+            RecordsTableSeeder::class,
+            EmotionsTableSeeder::class
         ]);
     }
 }

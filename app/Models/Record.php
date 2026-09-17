@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Enums\RecordVisibility;
 use App\Models\Category;
+use App\Models\Emotion;
 use App\Models\Tier;
 use Illuminate\Database\Eloquent\Model;
 
@@ -25,6 +26,11 @@ class Record extends Model
     public function tiers() {
         return $this->belongsTo(Tier::class);
     }
+
+    public function emoptions() {
+        return $this->belongsToMany(Emotion::class);
+    }
+
     // Automatically transforms raw database values into typed PHP objects
     // (e.g., Enums and Carbon dates).
     // Ensures strict type safety and seamless data conversion 
