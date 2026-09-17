@@ -11,12 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('record_emotion', function (Blueprint $table) {
+        Schema::create('emotion_record', function (Blueprint $table) {
             $table->id();
 
             //defining foreign keys for pivot table
-            $table->foreignId('record_id')->constrained()->cascadeOnDelete();
+
             $table->foreignId('emotion_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('record_id')->constrained()->cascadeOnDelete();
 
             $table->timestamps();
         });
@@ -27,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('record_emotion');
+        Schema::dropIfExists('emotion_record');
     }
 };

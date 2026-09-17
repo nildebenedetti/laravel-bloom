@@ -27,7 +27,7 @@ class Record extends Model
         return $this->belongsTo(Tier::class);
     }
 
-    public function emoptions() {
+    public function emotions() {
         return $this->belongsToMany(Emotion::class);
     }
 

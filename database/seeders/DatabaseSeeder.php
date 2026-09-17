@@ -29,8 +29,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             CategoriesTableSeeder::class,
             TiersTableSeeder::class,
-            RecordsTableSeeder::class,
-            EmotionsTableSeeder::class
+            EmotionsTableSeeder::class,
+            RecordsTableSeeder::class
         ]);
     }
 }
