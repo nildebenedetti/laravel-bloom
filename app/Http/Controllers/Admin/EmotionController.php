@@ -14,7 +14,7 @@ class EmotionController extends Controller
     public function index()
     {
         $emotions = Emotion::all();
-        return view('emotions.index');
+        return view('emotions.index', compact('emotions'));
     }
 
     /**
@@ -22,7 +22,7 @@ class EmotionController extends Controller
      */
     public function create()
     {
-        //
+        return view('emotions.create');
     }
 
     /**
@@ -30,7 +30,16 @@ class EmotionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+
+        $newEmotion = new Emotion();
+
+        $newEmotion->name = $data['name'];
+        $newEmotion->color = $data['color'];
+
+        $newEmotion->save();
+
+        return redirect()->route('emotions.show', $newEmotion);
     }
 
     /**
@@ -38,7 +47,7 @@ class EmotionController extends Controller
      */
     public function show(Emotion $emotion)
     {
-        //
+        return view('emotions.show', compact('emotion'));
     }
 
     /**
@@ -46,7 +55,7 @@ class EmotionController extends Controller
      */
     public function edit(Emotion $emotion)
     {
-        //
+        return view('emotions.edit', compact('emotion'));
     }
 
     /**
@@ -54,7 +63,11 @@ class EmotionController extends Controller
      */
     public function update(Request $request, Emotion $emotion)
     {
-        //
+        $data = $request->all();
+
+        $emotion->update($data);
+        
+        return redirect()->route('emotions.show', $emotion);
     }
 
     /**
@@ -62,6 +75,8 @@ class EmotionController extends Controller
      */
     public function destroy(Emotion $emotion)
     {
-        //
+        $emotion->delete();
+
+        return redirect()->route('emotions.index');
     }
 }
