@@ -12,7 +12,7 @@
     </div>
     <!-- Resource Interaction Btns-->
     <div class="btn-wrapper px-5 d-flex justify-content-end align-items-center gap-3">
-        <a href="#" class="btn btn-outline-warning">
+        <a href="{{ route('tiers.edit', $tier)}}" class="btn btn-outline-warning">
         Edit
         </a>
         <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#">

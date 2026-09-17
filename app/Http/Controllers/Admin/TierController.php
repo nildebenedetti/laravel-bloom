@@ -55,7 +55,7 @@ class TierController extends Controller
      */
     public function edit(Tier $tier)
     {
-        //
+        return view('tiers.edit', compact('tier'));
     }
 
     /**
@@ -63,7 +63,11 @@ class TierController extends Controller
      */
     public function update(Request $request, Tier $tier)
     {
-        //
+        $data = $request->all();
+
+        $tier->update($data);
+
+        return redirect()->route('tiers.show', $tier);
     }
 
     /**

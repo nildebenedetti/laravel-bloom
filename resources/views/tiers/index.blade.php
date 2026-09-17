@@ -34,7 +34,7 @@
                 <td>{{ $tier->description }}</td>
                 <td>
                     <a href="{{ route('tiers.show', $tier) }}" class="action-btn btn btn-outline-info"><i class="bi bi-arrow-right"></i></a> 
-                        <a href="#" class="action-btn btn btn-outline-warning"><i class="bi bi-pencil-fill"></i></a>
+                        <a href="{{ route('tiers.edit', $tier) }}" class="action-btn btn btn-outline-warning"><i class="bi bi-pencil-fill"></i></a>
                         <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#">
                         Delete
                         </button>
