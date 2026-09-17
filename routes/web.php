@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\Admin\RecordController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\TierController;
+use App\Http\Controllers\Admin\RecordController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -21,6 +22,7 @@ Route::middleware('auth', 'verified')->group( function () {
 
     Route::resource('/records', RecordController::class);
     Route::resource('/categories', CategoryController::class);
+    Route::resource('/tiers', TierController::class);
 
 });
 
