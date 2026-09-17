@@ -22,7 +22,7 @@ class TierController extends Controller
      */
     public function create()
     {
-        //
+        return view('tiers.create');
     }
 
     /**
@@ -30,7 +30,16 @@ class TierController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+
+        $newTier = new Tier();
+
+        $newTier->name = $data['name'];
+        $newTier->description = $data['description'];
+
+        $newTier->save();
+
+        return redirect()->route('tiers.show', $newTier);
     }
 
     /**
