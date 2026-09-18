@@ -16,7 +16,7 @@
     <div class="container cards-container pb-4">
         <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-3 justify-content-center">
             <!-- Users -->
-            <x-page-access-card>
+            <x-page-access-card :route="route('users.index')">
                 <x-slot:icon>
                     <i class="bi bi-person"></i>
                 </x-slot:icon>
