@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Enums\RecordVisibility;
 use App\Http\Controllers\Controller;
+use App\Models\Category;
+use App\Models\Emotion;
 use App\Models\Record;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -25,7 +27,10 @@ class RecordController extends Controller
      */
     public function create()
     {
-        return view("records.create");
+        $categories = Category::all();
+        $emotions = Emotion::all();
+
+        return view("records.create", compact('categories', 'emotions'));
     }
 
     /**
@@ -39,6 +44,7 @@ class RecordController extends Controller
 
         $newRecord->title = $data['title'];
         $newRecord->description = $data['description'];
+        $newRecord->category_id = $data['category_id'];
         $newRecord->date = $data['date'];
         $newRecord->visibility = $data['visibility'];
 
@@ -59,6 +65,10 @@ class RecordController extends Controller
 
         if(array_key_exists("image_alt", $data)) {
             $newRecord->image_alt = $data['image_alt'];
+        }
+
+        if($request->has('emotions')) {
+            $newRecord->emotions()->attach($data['emotions']);
         }
 		
 
@@ -81,7 +91,11 @@ class RecordController extends Controller
      */
     public function edit(Record $record)
     {
-        return view("records.edit", compact("record"));
+        $categories = Category::all();
+        $emotions = Emotion::all();
+
+
+        return view("records.edit", compact("record", 'categories', 'emotions'));
     }
 
     /**
@@ -117,6 +131,15 @@ class RecordController extends Controller
         }
 
         $record->update($data);
+
+                // shall the request have the array
+        if ($request->has('emotions')) {
+            // update the array overriding it with the new one in pivot table
+            $record->emotions()->sync($data['emotions']);
+        } else {
+            // if nothing is selected in the checkbox, it means empty and we shall remove the array in db
+            $record->emotions()->detach();
+        }
 
         return redirect()->route('records.show', $record);
     }

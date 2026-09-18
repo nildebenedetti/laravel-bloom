@@ -3,6 +3,7 @@
 @section('title', 'Add a New Record ')
 
 @section("content")
+
     <div class="container form-container p-4">
     <!-- Back to All btn-->
     <div class="btn-wrapper d-flex justify-content-start">
@@ -27,8 +28,17 @@
             <!-- User -->
 
             <!-- category selection -->
-
-            <!-- emotions -->
+            <div class="mb-3">
+                <label for="category_id" class="form-label">Category</label>
+                <select name="category_id" id="category_id" class="form-select">
+                    <option value="">Select a category</option>
+                    @foreach($categories as $category)
+                        <option value="{{ $category->id }}">
+                            {{ $category->name }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
 
             <!-- image input -->
             <div class="col col-sm-12 mb-3 d-flex flex-wrap mx-4 mt-4 gap-3 align-items-baseline">
@@ -46,6 +56,23 @@
                 <label for="description" class="py-2">Description</label>
                 <textarea required id="description" name="description" rows="10" ></textarea>
             </div>
+
+            <!-- emotions -->
+            <div class="container">
+                <div class="form-control my-3 d-flex flex-wrap">
+                    @foreach($emotions as $emotion)
+                    <div>
+                        <input type="checkbox" 
+                        name="emotions[]" 
+                        value="{{ $emotion->id }}"
+                        id="emotion-{{ $emotion->id }}"
+                        class="mx-2">
+                        <label for="emotion{{ $emotion->id }}">{{ $emotion->name }}</label>
+                    </div>
+                    @endforeach
+                </div>
+            </div>
+
             <!-- Visibility-->
             <div class="col col-sm-12 col-md-12 col-lg-12 d-flex flex-column py-3">
                     <select name="visibility" id="visibility">

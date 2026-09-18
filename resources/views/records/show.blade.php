@@ -4,7 +4,6 @@
 
 @section('content')
 
-
 <div class="btns-wrapper container d-flex justify-content-between mt-3">
     <!-- Back to All btn-->
     <div class="btn-wrapper d-flex justify-content-start">
@@ -27,10 +26,19 @@
         {{ $record->title }}
     </h4>
 <!-- Category-->
-<p class="fs-5 text-muted">{{ $record->category->name}}</p>
+    <p class="fs-5 text-muted">{{ $record->category->name}}</p>
 
-<!--- Emotion Pills-->
+    <!--- Emotion Pills-->
+    <div class="d-flex gap-2 mb-2">
+        @if(count($record->emotions) > 0)
+        @foreach($record->emotions as $emotion)
+        <span class="badge rounder-pill" style="background-color:{{ $emotion->color }}">{{ $emotion->name }}</span>
+        @endforeach
+        @endif
+    </div>
 </div>
+
+
 <!-- Image -->
 @if($record->image_path)
 <div class="container">
