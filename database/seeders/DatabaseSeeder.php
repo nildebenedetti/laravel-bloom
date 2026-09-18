@@ -6,6 +6,7 @@ use Database\Seeders\CategoriesTableSeeder;
 use Database\Seeders\EmotionsTableSeeder;
 use Database\Seeders\RecordsTableSeeder;
 use Database\Seeders\TiersTableSeeder;
+use Database\Seeders\UserTableSeeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -27,6 +28,7 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         $this->call([
+            UserTableSeeder::class,
             CategoriesTableSeeder::class,
             TiersTableSeeder::class,
             EmotionsTableSeeder::class,

@@ -3,9 +3,10 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use App\Models\UserProfile;
 use Illuminate\Database\Seeder;
 
-class UserProfileTableSeeder extends Seeder
+class UserTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -16,7 +17,8 @@ class UserProfileTableSeeder extends Seeder
         $admin = User::create([
             'name' => 'Admin',
             'email' => 'admin@bloom.org',
-            'password' => 'safepsw@bloom2026'
+            'password' => 'safepsw@bloom2026',
+            'role' => 'admin'
 
         ]);
 
@@ -28,7 +30,8 @@ class UserProfileTableSeeder extends Seeder
         $user = User::create([
             'name' => 'Ophelia',
             'email' => 'offHell@live.com',
-            'role' => 'user',
+            'password' => 'password123',
+            'role' => 'user'
         ]);
 
         $user->profile()->create([ 'bio' => 'Hopeless Romantic. Love Flowers and being around kind souls. Currently healing my broken heart.' ]);

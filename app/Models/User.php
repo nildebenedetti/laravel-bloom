@@ -32,7 +32,11 @@ class User extends Authenticatable
 
     }
 
-    public function userProfile() {
+    public function profile() {
         return $this->hasOne(UserProfile::class);
+    }
+
+    public function isAdmin(): bool { // true or false
+        return $this->role === 'admin';
     }
 }
