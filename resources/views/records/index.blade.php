@@ -3,6 +3,7 @@
 @section('title', 'All Records')
 
 @section('content')
+
     <div class="btns-wrapper container d-flex justify-content-between mt-3">
     <!-- Back to All btn-->
     <div class="btn-wrapper d-flex justify-content-start">

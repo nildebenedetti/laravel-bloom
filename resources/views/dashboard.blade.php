@@ -52,7 +52,7 @@
                 </x-slot:description>
             </x-page-access-card>
             <!-- Emotions -->
-            <x-page-access-card>
+            <x-page-access-card :route="route('emotions.index')">
                 <x-slot:icon>
                     <i class="bi bi-balloon-heart"></i>
                 </x-slot:icon>

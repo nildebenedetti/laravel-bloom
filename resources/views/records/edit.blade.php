@@ -6,7 +6,7 @@
     <div class="container form-container p-4">
             <!-- Back to resource-->
     <div class="btn-wrapper d-flex justify-content-start">
-        <a href="{{ route('records.show', $tier) }}" class="btn bg-light-blue text-secondary">
+        <a href="{{ route('records.show', $record) }}" class="btn bg-light-blue text-secondary">
         Back to <b>{{ $record->name }}</b>
         </a>
     </div>
@@ -31,9 +31,20 @@
             
             <!-- User -->
 
-            <!-- category selection -->
+            <!-- category selection (1:N) -->
+            <div class="mb-3">
+                <label for="category_id" class="form-label">Category</label>
+                <select name="category_id" id="category_id" class="form-select">
+                    <option value="">Select a category</option>
+                    @foreach($categories as $category)
+                        <option value="{{ $category->id }}" 
+                            {{ old('category_id', $record->category_id) == $category->id ? 'selected' : '' }}>
+                            {{ $category->name }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
 
-            <!-- emotions -->
 
             <!-- image input -->
             <div class="col col-sm-12 mb-3 d-flex flex-wrap mx-4 mt-4 gap-3 align-items-baseline">
@@ -56,6 +67,26 @@
             <div class="col col-sm-12 col-md-12 col-lg-12 d-flex flex-column">
                 <label for="description" class="py-2"></label>
                 <textarea required id="description" name="description" rows="10" >{{ $record->description }}</textarea>
+            </div>
+
+            <!-- emotions selection (N:N) -->
+            <div class="mb-3 mt-2">
+                <label class="form-label d-block">Emotions</label>
+                <div class="d-flex flex-wrap gap-3">
+                    @foreach($emotions as $emotion)
+                        <div class="form-check">
+                            <input type="checkbox" 
+                                name="emotions[]" 
+                                value="{{ $emotion->id }}"
+                                id="emotion-{{ $emotion->id }}"
+                                class="form-check-input"
+                                {{ in_array($emotion->id, old('emotions', $record->emotions->pluck('id')->toArray())) ? 'checked' : '' }}>
+                            <label for="emotion-{{ $emotion->id }}" class="form-check-label">
+                                {{ $emotion->name }}
+                            </label>
+                        </div>
+                    @endforeach
+                </div>
             </div>
             <!-- Visibility
             * Dynamically marks the option as selected if its value matches 

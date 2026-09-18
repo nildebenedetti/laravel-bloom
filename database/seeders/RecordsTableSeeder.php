@@ -2,9 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\Emotion;
 use App\Models\Record;
-use Illuminate\Database\Seeder;
 use Faker\Generator as Faker;
+use Illuminate\Database\Seeder;
 
 class RecordsTableSeeder extends Seeder
 {
@@ -13,6 +14,8 @@ class RecordsTableSeeder extends Seeder
      */
     public function run(Faker $faker): void
     {
+        $emotionsIds = Emotion::pluck('id')->toArray();
+
         for ($i = 0; $i < 10; $i++) {
             $newRecord = new Record();
             $coin = rand(0, 1);
@@ -26,6 +29,10 @@ class RecordsTableSeeder extends Seeder
             $newRecord->tier_id = rand(1, 4);
 
             $newRecord->save();
+
+            $randomEmotions = $faker->randomElements($emotionsIds, rand(2, 5));
+
+            $newRecord->emotions()->attach($randomEmotions);
         }
     }
 }
