@@ -44,7 +44,7 @@ class RecordController extends Controller
 
         }
 
-        public function update(StoreRecordRequest $request, Record $record) {
+        public function update(StoreRecordRequest $request, Record $record) { // as we use put we can use the same function
 
             // if not authorized as record owner
             if (Auth::user()->id !== $record->user_id) {
@@ -58,5 +58,17 @@ class RecordController extends Controller
 
             // parse into json and return
             return new RecordResource($record);
+        }
+
+        public function destroy(Record $record) {
+
+             // if not authorized as record owner
+            if (Auth::user()->id !== $record->user_id) {
+                return error('', 'you are not authorized to delete this record', 403);
+            }
+
+            $record->delete();
+
+            return response(null, 204);
         }
 }
