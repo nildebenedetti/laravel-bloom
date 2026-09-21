@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Api\LoginUserRequest;
 use App\Http\Requests\Api\StoreUserRequest;
 use App\Models\User;
 use App\Traits\HttpResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
@@ -13,8 +15,30 @@ class AuthController extends Controller
     // we use the trait
     use HttpResponse;
 
-    public function login() {
-        return 'we are in the login!';
+    public function login(LoginUserRequest $request) {
+        // check for credentials meeting requirements
+        $request->validated($request->all());
+
+        // if so, check if they are authorized
+        // if the authentication attempt fails
+        If (!Auth::attempt([ 
+            'email' => $request->email, 
+            'password' => $request->password])) {
+            // respond with error (clearly NO DATA)
+            return $this->error('', 'credentials do not match', 401); // code for unauthorized
+            }
+
+        // IF AUTHORIZED
+
+        // assign first user matching the email (as it is unique value)
+        $user = User::where('email', $request->email)->first();
+
+        return $this->success([
+            'user' => $user,
+            'token' => $user->createToken('Api Token of' . $user->name)->plainTextToken
+        ]);
+
+
     }
 
     public function register(StoreUserRequest $request) { //pass form request as param
