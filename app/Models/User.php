@@ -37,6 +37,10 @@ class User extends Authenticatable
         return $this->hasOne(UserProfile::class);
     }
 
+    public function records() {
+        return $this->hasMany(Record::class);
+    }
+
     public function isAdmin(): bool { // true or false
         return $this->role === 'admin';
     }
