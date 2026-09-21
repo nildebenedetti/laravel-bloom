@@ -3,12 +3,17 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Resources\RecordResource;
+use App\Models\Record;
+use Illuminate\Support\Facades\Auth;
 
 class RecordController extends Controller
 {
         public function index()
             {
-                return "THIS IS RECORDS INDEX";
+            // only the records of the logged user
+            return RecordResource::collection(
+                Record::where('user_id', Auth::user()->id)->get()
+            );
             }
 }

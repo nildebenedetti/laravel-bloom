@@ -6,7 +6,6 @@ use App\Http\Requests\Api\LoginUserRequest;
 use App\Http\Requests\Api\StoreUserRequest;
 use App\Models\User;
 use App\Traits\HttpResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
