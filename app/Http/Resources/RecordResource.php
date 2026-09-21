@@ -21,7 +21,7 @@ class RecordResource extends JsonResource
                 'date' => $this->date,
                 'image_path' => $this->image_path,
                 'image_alt' => $this->image_alt,
-                'category ' => $this->category?->name,
+                'category ' => $this->category?->name, // Eloquent uses the foreign key automatically
                 'tier' => $this->tier?->name,
                 'visibility' => $this->visibility
                 ],
