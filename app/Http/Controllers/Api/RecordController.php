@@ -8,6 +8,7 @@ use App\Http\Resources\RecordResource;
 use App\Models\Record;
 use App\Traits\HttpResponse;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Request;
 
 class RecordController extends Controller
 {
@@ -41,7 +42,21 @@ class RecordController extends Controller
             // we create and parse into json
             return new RecordResource($record);
 
+        }
 
+        public function update(StoreRecordRequest $request, Record $record) {
 
+            // if not authorized as record owner
+            if (Auth::user()->id !== $record->user_id) {
+                return error('', 'you are not authorized to update this record', 403);
+            }
+
+            // otherwise update current record with request data
+            $data = $request->all();
+
+            $record->update($data);
+
+            // parse into json and return
+            return new RecordResource($record);
         }
 }

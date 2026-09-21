@@ -18,6 +18,7 @@ class RecordResource extends JsonResource
             'id' => (string)$this->id,
             'attributes' =>[
                 'title' => $this->title,
+                'description' => $this->description,
                 'date' => $this->date,
                 'image_path' => $this->image_path,
                 'image_alt' => $this->image_alt,
