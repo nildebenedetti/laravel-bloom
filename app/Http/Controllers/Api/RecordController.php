@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\StoreRecordRequest;
 use App\Http\Resources\RecordResource;
 use App\Models\Record;
 use App\Traits\HttpResponse;
@@ -27,6 +28,20 @@ class RecordController extends Controller
             }
 
             return new RecordResource($record); // parsin into json for response
+
+        }
+
+        public function store(StoreRecordRequest $request) {
+            // as we have an incoming reuqest we need to validate it
+            $record = Record::create([
+                'user_id' => Auth::id(),
+                ...$request->validated(),
+            ]); 
+
+            // we create and parse into json
+            return new RecordResource($record);
+
+
 
         }
 }
