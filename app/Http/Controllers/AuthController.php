@@ -13,4 +13,17 @@ class AuthController extends Controller
     public function login() {
         return 'we are in the login!';
     }
+
+    public function register() {
+        return response()->json(
+            'this is my register response!');
+    }
+
+    public function logout() {
+        return response()->json(
+            'this is my logout repsonse'
+        );
+    }
+
+
 }
