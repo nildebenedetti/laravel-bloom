@@ -20,7 +20,10 @@ class Record extends Model
     'date',
     'image_path',
     'image_alt',
-    'visibility'
+    'visibility',
+    'category_id',
+    'tier_id',
+    'user_id',
 ];
 
     public function category() {
