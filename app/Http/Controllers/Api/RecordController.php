@@ -15,10 +15,12 @@ class RecordController extends Controller
 
         public function index()
             {
+                $records = $request->user() // access to auth user instance
+                ->records() // access hasMany relationship method defined in user model
+                ->with(['category', 'tier', 'emotions']) // Eager loads related models data (prevents N+1)
+                ->get(); // executes query
                 // only the records of the logged user
-                return RecordResource::collection(
-                    Record::where('user_id', Auth::user()->id)->get()
-                );
+                return RecordResource::collection($records);
             }
 
         public function show(Record $record) {
@@ -27,19 +29,29 @@ class RecordController extends Controller
                 return $this->error('', 'you are not authorized to access this record', 403);
             }
 
-            return new RecordResource($record); // parsin into json for response
+            return new RecordResource($record->load(['category', 'tier', 'user', 'emotions'])); // parsin into json for response
 
         }
 
         public function store(StoreRecordRequest $request) {
             // as we have an incoming reuqest we need to validate it
+            $validated = $request->validated();
+
+            // then create a new record with user_id as request sender's
+            // and all validated field
             $record = Record::create([
                 'user_id' => Auth::id(),
-                ...$request->validated(),
+                ...$validated,
             ]); 
 
+            // link emotions in pivot table (if present)
+            if (!empty($validated['emotions'])) {
+                $record->emotions()->attach($validated['emotions']);
+            }
+
             // we create and parse into json
-            return new RecordResource($record);
+            // with eager loading for complete data of related resources
+            return new RecordResource($record->load(['category', 'tier', 'user', 'emotions']));
 
         }
 
@@ -50,13 +62,19 @@ class RecordController extends Controller
                 return error('', 'you are not authorized to update this record', 403);
             }
 
-            // otherwise update current record with request data
-            $data = $request->all();
+            // validate request data
+            $validated = $request->validated();
 
-            $record->update($data);
+            // if emotions are present
+            // use isset to grant option of removing emotions in PUT 
+            if (isset($validated['emotions'])) {
+                $record->emotions()->sync($validated['emotions']); // synch for updating db
+            }
+
+            $record->update($validated);
 
             // parse into json and return
-            return new RecordResource($record);
+            return new RecordResource($record->load(['category', 'tier', 'user', 'emotions']));
         }
 
         public function destroy(Record $record) {
