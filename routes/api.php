@@ -2,8 +2,8 @@
 
 use App\Http\Controllers\Api\MeadowController;
 use App\Http\Controllers\Api\RecordController;
+use App\Http\Controllers\Api\PrismController;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\PrismController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -26,7 +26,7 @@ Route::get('/blooming-meadow', [MeadowController::class, 'index']);
 // 1. il middleware che vogliamo frapporre
 // 2. una callback function che chiama le rotte da inserire
 
-Route::group( ['middleware' => ['auth:sanctum'] ], function() {
+Route::group(['as' => 'api.', 'middleware' => ['auth:sanctum'] ], function() {
 
         Route::post('/logout', [AuthController::class, 'logout']);
         Route::apiResource('/records', RecordController::class);
