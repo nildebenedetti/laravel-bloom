@@ -26,7 +26,7 @@ class MeadowController extends Controller
             $q->whereIn('emotions.id', (array) $request->emotions);
             });
         })
-        ->orderBy('date', 'desc')
+        ->orderBy('created_at', 'desc')
         ->paginate(15);
 
         // parse to json
