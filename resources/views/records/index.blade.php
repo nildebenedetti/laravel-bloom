@@ -13,7 +13,7 @@
     </div>
     <!-- Resource Interaction Btns-->
     <div class="btn-wrapper px-5 d-flex justify-content-end align-items-center">
-        <a href="{{ route('records.create' ) }}" class="btn btn-outline-success">
+        <a href="{{ route('admin.records.create' ) }}" class="btn btn-outline-success">
             Add New
         </a>
     </div>

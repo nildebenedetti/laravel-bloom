@@ -9,7 +9,7 @@
             <!-- Category-->
             <p class="card-subtitle">{{ $record->category->name  }}</p>
             <div class="btn-wrapper d-flex justify-content-end">
-                <a href="{{ route('records.show', $record) }}" class="btn bg-light-blue mt-3">
+                <a href="{{ route('admin.records.show', $record) }}" class="btn bg-light-blue mt-3">
                     <i class="bi bi-arrow-right-short"></i>
                 </a>
             </div>

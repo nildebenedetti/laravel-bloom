@@ -7,11 +7,11 @@
     <div class="container form-container p-4">
     <!-- Back to All btn-->
     <div class="btn-wrapper d-flex justify-content-start">
-        <a href="{{ route('records.index') }}" class="btn bg-light-blue text-secondary">
+        <a href="{{ route('admin.records.index') }}" class="btn bg-light-blue text-secondary">
         Back to All
         </a>
     </div>
-    <form action="{{ route('records.store') }}" method="POST" class="py-4" enctype="multipart/form-data">
+    <form action="{{ route('admin.records.store') }}" method="POST" class="py-4" enctype="multipart/form-data">
         @csrf {{-- security token for Cross-Site Request Forgery --}}
         <div class="row d-flex justify-content-center">
             <!-- title -->

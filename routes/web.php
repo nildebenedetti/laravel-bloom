@@ -33,7 +33,7 @@ Route::middleware('auth', 'verified', IsAdmin::class)
         ->group( function () {
 
     Route::resource('/users', UserController::class);
-    Route::resource('/records', RecordController::class);
+    Route::resource('/records', RecordController::class)->names('admin.records');
     Route::resource('/categories', CategoryController::class);
     Route::resource('/tiers', TierController::class);
     Route::resource('/emotions', EmotionController::class);
