@@ -25,7 +25,7 @@
                 </x-slot:description>
             </x-page-access-card>
             <!-- Records -->
-            <x-page-access-card :route="route('records.index')">
+            <x-page-access-card :route="route('admin.records.index')">
                 <x-slot:icon>
                     <i class="bi bi-journal-richtext"></i>
                 </x-slot:icon>
