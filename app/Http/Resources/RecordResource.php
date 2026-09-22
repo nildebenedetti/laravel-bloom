@@ -16,20 +16,21 @@ class RecordResource extends JsonResource
     {
         return [
             'id' => (string)$this->id,
-            'attributes' =>[
-                'title' => $this->title,
-                'description' => $this->description,
-                'date' => $this->date,
-                'image_path' => $this->image_path,
-                'image_alt' => $this->image_alt,
-                'category ' => $this->category?->name, // Eloquent uses the foreign key automatically
-                'tier' => $this->tier?->name,
-                'visibility' => $this->visibility
+            'attributes'        =>[
+                'title'             => $this->title,
+                'description'       => $this->description,
+                'date'              => $this->date,
+                'image_path'        => $this->image_path,
+                'image_alt'         => $this->image_alt,
+                'category '         => $this->category?->name, // Eloquent uses the foreign key automatically
+                'tier'              => $this->tier?->name,
+                'visibility'        => $this->visibility,
+                'emotions'          => EmotionResource::collection($this->whenLoaded('emotions')),
                 ],
                 'relationships' => [
-                    'user' => [
-                        'id' => (string)$this->user?->id,
-                        'user name' => $this->user?->name,
+                    'user'      =>   [
+                        'id'         => (string)$this->user?->id,
+                        'user name'  => $this->user?->name,
                         'user email' => $this->user?->email,
                     ],
                 ],
