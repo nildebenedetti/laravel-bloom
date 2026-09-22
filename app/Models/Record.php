@@ -30,11 +30,11 @@ class Record extends Model
         return $this->belongsTo(Category::class);
     }
 
-    public function tiers() {
+    public function tier() {
         return $this->belongsTo(Tier::class);
     }
 
-    public function users() {
+    public function user() {
         return $this->belongsTo(User::class);
     }
 
