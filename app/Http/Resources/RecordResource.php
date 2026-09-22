@@ -25,9 +25,7 @@ class RecordResource extends JsonResource
                 'category '         => $this->category?->name, // Eloquent uses the foreign key automatically
                 'tier'              => $this->tier?->name,
                 'visibility'        => $this->visibility,
-                'emotions'          => $this->whenLoaded('emotions', function () {
-                    return $this->emotions->pluck('name');
-                }),
+                'emotions'          => EmotionResource::collection($this->whenLoaded('emotions')),
                 ],
                 'relationships' => [
                     'user'      =>   [
