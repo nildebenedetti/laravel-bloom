@@ -8,7 +8,6 @@ use App\Http\Resources\RecordResource;
 use App\Models\Record;
 use App\Traits\HttpResponse;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Request;
 
 class RecordController extends Controller
 {
