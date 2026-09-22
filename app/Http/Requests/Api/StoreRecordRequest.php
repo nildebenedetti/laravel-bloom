@@ -32,6 +32,8 @@ class StoreRecordRequest extends FormRequest
             'visibility'   => ['required', 'string', Rule::in(['public', 'private'])],
             'category_id'  => ['required', 'integer', 'exists:categories,id'],
             'tier_id'      => ['required', 'integer', 'exists:tiers,id'],
+            'emotions'     => ['nullable', 'array'], 
+            'emotions.*'   => ['integer', 'exists:emotions,id'], // elems in emotions array must be integers and exist in column ID of emotions table
         ];
     }
 }
