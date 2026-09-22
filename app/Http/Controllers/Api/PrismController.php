@@ -9,6 +9,11 @@ use Illuminate\Http\Request;
 class PrismController extends Controller
 {
     public function index(Request $request) {
+        // extraact sort order from query string
+        // (es. ?order=asc o ?order=desc)
+        // strtolower is native PHP function === JS .toLowerCase()
+        // order is by def desc unless query strign sets asc
+        $sortOrder = strtolower($request->input('order')) === 'asc' ? 'asc' : 'desc';
         
         $records = $request->user()->records()
         ->when($request->filled('emotions'), function ($query) use ($request) {
@@ -16,10 +21,10 @@ class PrismController extends Controller
                 $q->whereIn('emotions.id', (array) $request->emotions);
             });
         })
-        ->orderBy('date', 'desc')
+        ->orderBy('date', $sortOrder)
         ->paginate(20);
 
-        return RecordResource::collection($records);
+        return RecordResource::collection($records->load('emotions'));
         
 
     }
