@@ -1,8 +1,9 @@
 <?php
 
+use App\Http\Controllers\Api\MeadowController;
 use App\Http\Controllers\Api\RecordController;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\Api\MeadowController;
+use App\Http\Controllers\PrismController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -29,6 +30,7 @@ Route::group( ['middleware' => ['auth:sanctum'] ], function() {
 
         Route::post('/logout', [AuthController::class, 'logout']);
         Route::apiResource('/records', RecordController::class);
+        Route::get('/prism', [PrismController::class, 'index']);
 
     }
 ); 
