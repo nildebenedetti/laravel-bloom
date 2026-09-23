@@ -27,6 +27,7 @@ class DashboardController extends Controller
         }
 
         // NOW, THE DYNAMIC CHARTS
+
         // spider: emotion distribution in records, how many time they 
         // appeared in the records
         $spiderChart = DB::table('emotions')
@@ -52,10 +53,33 @@ class DashboardController extends Controller
             ->groupBy('emotions.id', 'emotions.name')
             ->get();
 
+
+            // pie chart
+            // records distribution by category
+            $pieChartBaseQuery = clone $baseQuery; // clone as otherwise the reference is copied, not the value and we would infer destructively the first variable by manipulating the latter
+
+            $pieChart = $pieChartBaseQuery
+            ->join('categories', 'categories.id', '=', 'records.category_id')
+            // for each category, provide the count
+            ->select('categories.name as category', DB::raw('count(*) as count'))
+            // then group raws
+            ->groupBy('category')
+            ->get();
+
+            // what happens in SQL:
+            // SELECT categories.name as category, count(*) as count 
+            // FROM records 
+            // INNER JOIN categories ON categories.id = records.category_id
+            // WHERE records.user_id = N AND records.date >= '2026-XX-23' -- (filters from $baseQuery)
+            // GROUP BY category;
+
+            // return response in json
             return response()->json([
                 'time_range' => $timeRange,
                 'charts' => [
-                    'spider' => $spiderChart
+                    'spider' => $spiderChart,
+                    'pie' => $pieChart,
+
                 ]
             ]);
 
