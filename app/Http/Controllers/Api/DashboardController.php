@@ -12,7 +12,7 @@ class DashboardController extends Controller
     public function stats(Request $request) {
         // get user
         $user = $request->user();
-        // parameter MUST be sent by frontend in request params
+        // parameter MUST be sent by frontend in request params, yet we set fallback value
         $timeRange = $request->input('time_range', 'all_time');
 
         // base query: get all_time
