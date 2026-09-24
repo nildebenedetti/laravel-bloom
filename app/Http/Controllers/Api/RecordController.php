@@ -9,6 +9,7 @@ use App\Models\Record;
 use App\Traits\HttpResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class RecordController extends Controller
 {
@@ -100,6 +101,19 @@ class RecordController extends Controller
             // validate request data
             $validated = $request->validated();
 
+            //if img is present, clean old img, store new, rewrite img_path
+            if ($request->hasFile('iamge')) {
+                if ($record->image_path && Storage::disk('records')->exists($record->image_path)) {
+                    Storage::disk('records')->delete($record->image_path);
+                    
+                    // save new image ad inmg path
+                    $validated['image_path'] = $request->file('image')->store('records');
+
+                    // remove image from associative array
+                    unset($validated['image']);
+                }
+            }
+
             // if emotions are present
             // use isset to grant option of removing emotions in PUT 
             if (isset($validated['emotions'])) {
@@ -117,6 +131,11 @@ class RecordController extends Controller
              // if not authorized as record owner
             if (Auth::user()->id !== $record->user_id) {
                 return error('', 'you are not authorized to delete this record', 403);
+            }
+
+            // if present, delete the file from storage
+            if ( $record->image_path && Storage::disk('records')->exists($record->image_path)) {
+                Storage::disk('records')->delete($record->image_path);
             }
 
             $record->delete();
