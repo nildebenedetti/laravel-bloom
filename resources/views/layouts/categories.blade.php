@@ -12,7 +12,7 @@
     <title>Categories</title>
 
 </head>
-    <body class="d-flex flex-column min-vh-100">
+    <body class="d-flex flex-column min-vh-100s">
         @include("partials.header")
 
         <div class="container px-2 pt-4">
