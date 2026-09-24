@@ -7,27 +7,30 @@
 <div class="container form-container p-4">
     <!-- Back to All btn-->
     <div class="btn-wrapper d-flex justify-content-start">
-        <a href="{{ route('categories.index') }}" class="btn bg-light-blue text-secondary">
+        <a href="{{ route('categories.index') }}" class="btn-lightblue">
         Back to All
         </a>
     </div>
-    <form action="{{ route('categories.store') }}" method="POST" class="py-4" enctype="multipart/form-data">
-        @csrf {{-- security token for Cross-Site Request Forgery --}}
-        <div class="row d-flex justify-content-center">
-            <!-- name -->
-            <div class="col col-sm-12 d-flex flex-column">
-                <label for="title" class="pt-2">Name</label>
-                <input required type="text" id="name" name="name">
+    <!--white bg wrapper-->
+    <div class="container bg-white bg-opacity-75 rounded-2 my-3">
+        <form action="{{ route('categories.store') }}" method="POST" class="py-4" enctype="multipart/form-data">
+            @csrf {{-- security token for Cross-Site Request Forgery --}}
+            <div class="row d-flex justify-content-center">
+                <!-- name -->
+                <div class="col col-sm-12 d-flex flex-column">
+                    <label for="title" class="pt-2">Name</label>
+                    <input required type="text" id="name" name="name">
+                </div>
+                <!-- description -->
+                <div class="col col-sm-12 col-md-12 col-lg-12 d-flex flex-column">
+                    <label for="description" class="py-2">Description</label>
+                    <textarea required id="description" name="description" rows="10" ></textarea>
+                </div>
             </div>
-            <!-- description -->
-            <div class="col col-sm-12 col-md-12 col-lg-12 d-flex flex-column">
-                <label for="description" class="py-2">Description</label>
-                <textarea required id="description" name="description" rows="10" ></textarea>
-            </div>
-        </div>
-        <div class="btn-wrapper d-flex justify-content-end pt-4">
-            <button type="submit" action class="btn btn-outline-primary px-3">Save</button>
-        </div>            
-    </form>
+            <div class="btn-wrapper d-flex justify-content-end pt-4">
+                <button type="submit" action class="btn-lightblue">Save</button>
+            </div>            
+        </form>
+    </div>
 </div>
 @endsection

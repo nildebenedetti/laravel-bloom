@@ -6,7 +6,7 @@
 <div class="container form-container p-4">
     <!-- Back to resource-->
     <div class="btn-wrapper d-flex justify-content-start">
-        <a href="{{ route('categories.show', $tier) }}" class="btn bg-light-blue text-secondary">
+        <a href="{{ route('categories.show', $category) }}" class="btn-lightblue">
         Back to <b>{{ $category->name }}</b>
         </a>
     </div>
@@ -26,7 +26,7 @@
             </div>
         </div>
         <div class="btn-wrapper d-flex justify-content-end pt-4">
-            <button type="submit" action class="btn btn-outline-primary px-3">Save</button>
+            <button type="submit" action class="btn-lightblue">Save</button>
         </div>            
     </form>
 </div>

@@ -74,7 +74,7 @@
 
             <div class="modal-footer">
                 {{-- Cancel btn --}}
-                <button type="button" class="btn-lightblue" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
 
                 {{-- Form for effective delete --}}
                 <form action="{{ route('admin.records.destroy', $record) }}" method="POST">
