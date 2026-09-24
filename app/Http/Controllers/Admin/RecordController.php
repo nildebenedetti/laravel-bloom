@@ -67,14 +67,13 @@ class RecordController extends Controller
             $newRecord->image_alt = $data['image_alt'];
         }
 
+                $newRecord->save();
+
         if($request->has('emotions')) {
             $newRecord->emotions()->attach($data['emotions']);
         }
-		
 
-        $newRecord->save();
-
-        return redirect()->route('records.show', $newRecord);
+        return redirect()->route('admin.records.show', $newRecord);
 
     }
 
@@ -141,7 +140,7 @@ class RecordController extends Controller
             $record->emotions()->detach();
         }
 
-        return redirect()->route('records.show', $record);
+        return redirect()->route('admin.records.show', $record);
     }
 
     /**
@@ -157,6 +156,6 @@ class RecordController extends Controller
 
         $record->delete();
 
-        return redirect()->route('records.index');
+        return redirect()->route('admin.records.index');
     }
 }
