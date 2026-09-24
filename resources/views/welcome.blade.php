@@ -6,7 +6,7 @@
         <p class="pt-2 text-secondary">Access is restricted to our staff only.</p>
         @guest
             <div class="d-flex justify-content-center py-5">
-                <a href="{{ route('login') }}" class="btn bg-light-blue text-dark">
+                <a href="{{ route('login') }}" class="btn-lightblue">
                     Go to Login
                 </a>
             </div>
