@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 
-    <div class="page-header container py-4 text-secondary">
+    <div class="page-header container py-4 text-secondary mx-auto d-flex flex-column align-items-center">
         <h2>Bloom Backoffice</h2>
         <p class="pt-2 text-secondary">Access is restricted to our staff only.</p>
         @guest
