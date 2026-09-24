@@ -13,11 +13,11 @@
 
         <link rel="icon" type="image/svg" href="{{ Vite::asset('resources/images/logos/bloom-logo.svg') }}">
     </head>
-    <body class="d-flex flex-column min-vh-100">
+    <body class="d-flex flex-column min-vh-100 flowerized">
         @include("partials.header")
 
 
-        <main class="flex-grow-1 pt-5 mt-4">
+        <main class="flex-grow-1 d-flex flex-column align-items-center w-100">
             @yield('content')
         </main>
 
