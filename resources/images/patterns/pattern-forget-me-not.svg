@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100">
+  <defs>
+    <!-- Singolo fiorellino -->
+    <g id="flower">
+      <!-- Petali -->
+      <circle cx="0" cy="-7" r="5.5" fill="#85b6ff"/>
+      <circle cx="6.6" cy="-2.2" r="5.5" fill="#85b6ff"/>
+      <circle cx="4.1" cy="5.7" r="5.5" fill="#85b6ff"/>
+      <circle cx="-4.1" cy="5.7" r="5.5" fill="#85b6ff"/>
+      <circle cx="-6.6" cy="-2.2" r="5.5" fill="#85b6ff"/>
+      <!-- Centro -->
+      <circle cx="0" cy="0" r="3" fill="#fef08a"/>
+      <circle cx="0" cy="0" r="1.2" fill="#f59e0b"/>
+    </g>
+  </defs>
+
+  <!-- Fiore al centro -->
+  <use href="#flower" x="50" y="50"/>
+
+  <!-- Fiori ai 4 angoli (garantiscono il seamless perfetto in ripetizione) -->
+  <use href="#flower" x="0" y="0"/>
+  <use href="#flower" x="100" y="0"/>
+  <use href="#flower" x="0" y="100"/>
+  <use href="#flower" x="100" y="100"/>
+</svg>

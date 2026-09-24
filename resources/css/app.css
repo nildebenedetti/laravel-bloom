@@ -3,6 +3,12 @@
 
 /* Add any custom style */
 
+/* ===== Global ==== */
+body {
+    background-color: #eef4f8;
+
+}
+
 /*======= UTILS =======*/
 .bg-light-blue {
     background-color: #93C5FD;
@@ -64,6 +70,28 @@
     cursor: not-allowed;
     transform: none;
     box-shadow: none;
+}
+
+/* flowerize banners/backgrounds */
+
+.flowerized {
+    background-image: url('../images/patterns/pattern-forget-me-not.svg');
+    background-repeat: repeat;
+    background-size: 150px 150px;
+}
+
+.banner {
+    /* Layout & Spacing */
+    padding: 1.5rem 2rem;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    
+    /* Text & Contrast */
+    color: #1e293b;
+    
+    /* Positioning & Overflow */
+    position: relative;
+    overflow: hidden;
 }
 
 /*===== HEADER ======*/
