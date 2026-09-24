@@ -6,29 +6,32 @@
 <div class="btns-wrapper container d-flex justify-content-between mt-3">
     <!-- Back to All btn-->
     <div class="btn-wrapper d-flex justify-content-start">
-        <a href="{{ route('tiers.index') }}" class="btn bg-light-blue text-secondary">
+        <a href="{{ route('tiers.index') }}" class="btn-lightblue">
         Back to All
         </a>
     </div>
     <!-- Resource Interaction Btns-->
-    <div class="btn-wrapper px-5 d-flex justify-content-end align-items-center gap-3">
-        <a href="{{ route('tiers.edit', $tier)}}" class="btn btn-outline-warning">
+    <div class="btn-wrapper d-flex justify-content-end align-items-center gap-3">
+        <a href="{{ route('tiers.edit', $tier)}}" class="btn-lightblue">
         Edit
         </a>
-        <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal-{{ $tier->id }}">
+        <button type="button" class="btn btn-lightblue" data-bs-toggle="modal" data-bs-target="#deleteModal-{{ $tier->id }}">
         Delete
         </button>
     </div>
 </div>
-<div class="page-title-wrapper container pt-4 text-capitalize d-flex flex-column">
-    <h4 class="page-title text-secondary">
-        {{ $tier->name }}
-    </h4>
-</div>
 
-<!-- Description -->
-<div class="container text-justify">
-    <p>{{ $tier->description }}</p>
+<!--white bg wrapper-->
+<div class="container bg-white bg-opacity-75 rounded-2 my-3">
+    <div class="page-title-wrapper container pt-4 text-capitalize d-flex flex-column">
+        <h2 class="page-title text-secondary">
+            {{ $tier->name }}
+        </h2>
+        </div>
+    <!-- Description -->
+    <div class="container text-justify">
+        <p>{{ $tier->description }}</p>
+    </div>
 </div>
 
 <!-- Modal for delete-->

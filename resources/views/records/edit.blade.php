@@ -4,7 +4,7 @@
 
 @section("content")
     <div class="container form-container p-4">
-            <!-- Back to resource-->
+    <!-- Back to resource-->
     <div class="btn-wrapper d-flex justify-content-star p-2">
         <a href="{{ route('admin.records.show', $record) }}" class="btn-lightblue">
         Back to <b>{{ $record->name }}</b>
