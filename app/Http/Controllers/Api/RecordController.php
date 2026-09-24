@@ -60,6 +60,18 @@ class RecordController extends Controller
             // as we have an incoming reuqest we need to validate it
             $validated = $request->validated();
 
+            // save image if present
+            if ($request->hasFile('image')) {
+                // create field to thew associative array (!!!)
+                $validated['image_path'] = $request->file('image')->store('records'); // at the same time storing file and initializing var with path!!
+
+            }
+
+            // now, I remove image from $validated associative array as we are going to store it 
+            // - the image is already saved , no need to put it elsewhere
+            $unset($validated['image']);
+
+
             // then create a new record with user_id as request sender's
             // and all validated field
             $record = Record::create([

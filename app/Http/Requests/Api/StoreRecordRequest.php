@@ -27,7 +27,8 @@ class StoreRecordRequest extends FormRequest
             'title'        => ['required', 'string', 'max:255'],
             'description'  => ['nullable', 'string'],
             'date'         => ['required', 'date'],
-            'image_path'   => ['nullable', 'string', 'max:255'], 
+            // we need to handle the sent file instead of the image path
+            'image'        => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'], // max iS 2048 KB = 2 MB 
             'image_alt'    => ['nullable', 'string', 'max:255'],
             'visibility'   => ['required', 'string', Rule::in(['public', 'private'])],
             'category_id'  => ['required', 'integer', 'exists:categories,id'],
