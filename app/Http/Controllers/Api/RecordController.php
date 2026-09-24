@@ -7,18 +7,42 @@ use App\Http\Requests\Api\StoreRecordRequest;
 use App\Http\Resources\RecordResource;
 use App\Models\Record;
 use App\Traits\HttpResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class RecordController extends Controller
 {
     use HttpResponse;
 
-        public function index()
+        public function index(Request $request)
             {
+                // extract sort order from query string
+                // (es. ?order=asc o ?order=desc)
+                // strtolower is native PHP function === JS .toLowerCase()
+                // order is by def desc unless query strign sets asc
+                $sortOrder = strtolower($request->input('order')) === 'asc' ? 'asc' : 'desc';
+
                 $records = $request->user() // access to auth user instance
                 ->records() // access hasMany relationship method defined in user model
+                // search looks up for values in the column only if search query is present
+                ->when($request->filled('search'), function ($query) use ($request) {
+                    $query->where('title', 'LIKE', '%' . $request->input('search') . '%');
+                })
+                            ->when($request->filled('emotions'), function ($query) use ($request) {
+                    $query->whereHas('emotions', function ($q) use ($request) {
+                        $q->whereIn('emotions.id', (array) $request->emotions);
+                    });
+                })
+                ->when($request->filled('category_id'), function ($query) use ($request) {
+                    $query->where('category_id', $request->category_id);
+                })
+                ->when($request->filled('tier_id'), function ($query) use ($request) {
+                    $query->where('tier_id', $request->tier_id);
+                })
                 ->with(['category', 'tier', 'emotions']) // Eager loads related models data (prevents N+1)
-                ->get(); // executes query
+                ->orderBy('date', $sortOrder)
+                ->paginate(20);
                 // only the records of the logged user
                 return RecordResource::collection($records);
             }
@@ -36,6 +60,18 @@ class RecordController extends Controller
         public function store(StoreRecordRequest $request) {
             // as we have an incoming reuqest we need to validate it
             $validated = $request->validated();
+
+            // save image if present
+            if ($request->hasFile('image')) {
+                // create field to thew associative array (!!!)
+                $validated['image_path'] = $request->file('image')->store('records'); // at the same time storing file and initializing var with path!!
+
+            }
+
+            // now, I remove image from $validated associative array as we are going to store it 
+            // - the image is already saved , no need to put it elsewhere
+            $unset($validated['image']);
+
 
             // then create a new record with user_id as request sender's
             // and all validated field
@@ -65,6 +101,19 @@ class RecordController extends Controller
             // validate request data
             $validated = $request->validated();
 
+            //if img is present, clean old img, store new, rewrite img_path
+            if ($request->hasFile('iamge')) {
+                if ($record->image_path && Storage::disk('records')->exists($record->image_path)) {
+                    Storage::disk('records')->delete($record->image_path);
+                    
+                    // save new image ad inmg path
+                    $validated['image_path'] = $request->file('image')->store('records');
+
+                    // remove image from associative array
+                    unset($validated['image']);
+                }
+            }
+
             // if emotions are present
             // use isset to grant option of removing emotions in PUT 
             if (isset($validated['emotions'])) {
@@ -82,6 +131,11 @@ class RecordController extends Controller
              // if not authorized as record owner
             if (Auth::user()->id !== $record->user_id) {
                 return error('', 'you are not authorized to delete this record', 403);
+            }
+
+            // if present, delete the file from storage
+            if ( $record->image_path && Storage::disk('records')->exists($record->image_path)) {
+                Storage::disk('records')->delete($record->image_path);
             }
 
             $record->delete();
