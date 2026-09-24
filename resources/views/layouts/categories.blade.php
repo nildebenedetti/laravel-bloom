@@ -16,7 +16,7 @@
         @include("partials.header")
 
         <div class="container align-items-center px-2 pt-4">
-            <h1 class="px-2">
+            <h1 class="px-2 title-color">
                 @yield("title")
             </h1>
         </div>

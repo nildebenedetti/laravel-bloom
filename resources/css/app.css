@@ -94,6 +94,10 @@ body {
     overflow: hidden;
 }
 
+.title-color {
+    color: #2f599e;
+}
+
 /*===== HEADER ======*/
 
 .glass-navbar {
