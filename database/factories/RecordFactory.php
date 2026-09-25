@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Category;
+use App\Models\Emotion;
 use App\Models\Record;
 use App\Models\Tier;
 use App\Models\User;
@@ -38,7 +39,7 @@ class RecordFactory extends Factory
         // responsible for matching the freshly created record id with emotions ids
         return $this->afterCreating(function (Record $record){
             // fetch 1 to 3 IDs from emotion table
-            $emotions = Emotion::inRandomOrder()->take(rand(1, 3))->pluck('id');
+            $emotions = \App\Models\Emotion::inRandomOrder()->take(rand(1, 3))->pluck('id');
             // Attach  emotion IDs to the record by creating rows in the pivot table (emotion_record)
             $record->emotions()->attach($emotions);
         });
