@@ -8,7 +8,7 @@
                 <small class="fst-italic text-muted"><i class="bi bi-calendar3 me-1"></i>{{ $record->date->format('d/m/Y') }}</small>
             </div>
             <div class="pt-2">
-                <small class="fst-italic text-muted">{{ $record->user->name }}</small>
+                <small class="fst-italic text-muted">{{ $record->user?->name ?? 'Unknown Author'}}</small>
             </div>
             <div class="btn-wrapper d-flex justify-content-end pt-4">
                 <a href="{{ route('admin.records.show', $record) }}" class="btn-lightblue-sm">
