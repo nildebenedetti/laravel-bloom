@@ -4,35 +4,60 @@
 
 @section('content')
 
-<div class="container form-container p-4">
-    <!-- Back to All btn-->
+<!-- Header Action Buttons -->
+<div class="container d-flex justify-content-between mt-3">
     <div class="btn-wrapper d-flex justify-content-start">
-        <a href="{{ route('emotions.index') }}" class="btn bg-light-blue text-secondary">
-        Back to All
+        <a href="{{ route('emotions.index') }}" class="btn-lightblue">
+            Back to All
         </a>
     </div>
-    <form action="{{ route('emotions.store') }}" method="POST" class="pt-4">
-        @csrf {{-- security token for Cross-Site Request Forgery --}}
-        <div class="row d-flex justify-content-start">
-        <!-- Name -->
-        <div class="col col-sm-12 col-lg-6 col-xl-4 d-flex flex-column">
-            <label for="name" class="py-2">Name</label>
-            <input type="text" id="name" name="name">
+</div>
+
+<!-- White Mask Card Container -->
+<div class="container bg-white bg-opacity-75 rounded-3 border shadow-sm my-3 p-4">
+
+    <form action="{{ route('emotions.store') }}" method="POST">
+        @csrf
+
+        <div class="row g-4">
+            <!-- Name -->
+            <div class="col-12 col-lg-6 d-flex flex-column">
+                <label for="name" class="form-label fw-semibold text-secondary">Name</label>
+                <input type="text" 
+                    id="name" 
+                    name="name" 
+                    class="form-control @error('name') is-invalid @enderror" 
+                    value="{{ old('name') }}" 
+                    required>
+                @error('name')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <!-- Color -->
+            <div class="col-12 col-lg-6 d-flex flex-column">
+                <label for="color" class="form-label fw-semibold text-secondary">Color</label>
+                <div class="d-flex align-items-center gap-3">
+                    <input type="color" 
+                        id="color" 
+                        name="color" 
+                        class="form-control form-control-color @error('color') is-invalid @enderror" 
+                        value="#85b6ff" 
+                        title="Choose emotion color">
+                    <span id="colorHelpInline" class="form-text fst-italic mb-0">
+                        Click on the color picker to select the desired shade.
+                    </span>
+                </div>
+                @error('color')
+                    <div class="text-danger small mt-1">{{ $message }}</div>
+                @enderror
+            </div>
         </div>
-        <!-- Color -->
-        <div class="col col-sm-12 col-lg-6 col-xl-4 d-flex flex-column">
-            <label for="color" class="pt-2">Color</label>
-            <div class="helper-text-wrapper py-2">
-            <span id="colorHelpInline" class="form-text fst-italic">
-                Click on the color picker and select the desired shade.
-            </span>
+
+        <!-- Submit Btn -->
+        <div class="d-flex justify-content-end pt-4 mt-4">
+            <button type="submit" class="btn-lightblue px-4 py-2">Create Emotion</button>
         </div>
-        <!-- input type color picks hexadecimal value! -->
-            <input type="color" id="color" name="color">
-        <!-- submit btn -->
-        <div class="btn-wrapper d-flex justify-content-end pt-4">
-            <button type="submit" class="btn btn-outline-primary px-3">Save</button>
-        </div>   
     </form>
 </div>
 

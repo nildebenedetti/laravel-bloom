@@ -1,16 +1,40 @@
 <header>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary glass-navbar">
-        <div class="container">
+    <nav class="navbar navbar-expand-lg glass-bar fixed-top">
+        <div class="container-fluid px-3">
+            <!--- logo -->
             <a class="navbar-brand" href="{{ url('/') }}">
                 <img class="navbar-logo" src="{{ Vite::asset('resources/images/logos/bloom-logo.svg') }}" alt="Bloom logo">
             </a>
 
+            <!--- hamburger -->
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <!-- Link Auth -->
+                @auth
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a href="{{ route('dashboard')}}" class="nav-link">Dashboard</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('categories.index')}}" class="nav-link">Users</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('admin.records.index')}}" class="nav-link">Records</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('users.index')}}" class="nav-link">Categories</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('tiers.index')}}" class="nav-link">Tiers</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('emotions.index')}}" class="nav-link">Emotions</a>
+                        </li>
+                    </ul>
+                @endauth
+    
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                     @guest
                         <li class="nav-item">
@@ -52,13 +76,3 @@
         </div>
     </nav>
 </header>
-
-                <!-- Link Main Navigation
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link {{ request()->is('/') ? 'active' : '' }}" aria-current="page" href="{{ url('/') }}">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Records</a>
-                    </li>
-                </ul> -->

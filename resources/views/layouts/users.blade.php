@@ -12,16 +12,16 @@
     <title>Users</title>
 
 </head>
-    <body class="d-flex flex-column min-vh-100">
+    <body class="d-flex flex-column min-vh-100 flowerized ">
         @include("partials.header")
 
-        <div class="container px-2 pt-4">
-            <h1 class="px-2">
+        <div class="container align-items-center px-2 pt-4">
+            <h1 class="px-2 title-color">
                 @yield("title")
             </h1>
         </div>
 
-        <main class="flex-grow-1">
+        <main class="flex-grow-1 d-flex flex-column align-items-center">
             @yield('content')
         </main>
 

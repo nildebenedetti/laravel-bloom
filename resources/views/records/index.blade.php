@@ -7,13 +7,13 @@
     <div class="btns-wrapper container d-flex justify-content-between mt-3">
     <!-- Back to All btn-->
     <div class="btn-wrapper d-flex justify-content-start">
-        <a href="{{ route('dashboard') }}" class="btn bg-light-blue text-secondary">
+        <a href="{{ route('dashboard') }}" class="btn-lightblue">
             Back to Dashboard
         </a>
     </div>
     <!-- Resource Interaction Btns-->
-    <div class="btn-wrapper px-5 d-flex justify-content-end align-items-center">
-        <a href="{{ route('admin.records.create' ) }}" class="btn btn-outline-success">
+    <div class="btn-wrapper d-flex justify-content-end align-items-center">
+        <a href="{{ route('admin.records.create' ) }}" class="btn-lightblue">
             Add New
         </a>
     </div>

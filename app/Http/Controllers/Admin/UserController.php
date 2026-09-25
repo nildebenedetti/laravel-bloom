@@ -76,18 +76,23 @@ class UserController extends Controller
         // get only validated data
         $data = $request->validated();
 
-        $user->update([
+        $userData = [
             'name' => $data['name'],
             'email' => $data['email'],
             'role' => $data['role'],
-            // update psw only when added
-            'password' => filled($data['password'] ?? null)
-        ]);
+        ];
+
+        // Update password only if explicitly provided
+        if (!empty($data['password'])) {
+            $userData['password'] = $data['password'];
+        }
+
+        $user->update($userData);
 
         // update/create bio in user_profiles 
         $user->profile()->updateOrCreate(
             ['user_id' => $user->id],
-            ['bio' => $data['password'] ?? null]
+            ['bio' => $data['bio'] ?? null]
         );
 
         return redirect()->route('users.show', compact('user'));

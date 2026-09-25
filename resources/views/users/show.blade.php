@@ -6,37 +6,40 @@
 <div class="btns-wrapper container d-flex justify-content-between mt-3">
     <!-- Back to All btn-->
     <div class="btn-wrapper d-flex justify-content-start">
-        <a href="{{ route('users.index') }}" class="btn bg-light-blue text-secondary">
+        <a href="{{ route('users.index') }}" class="btn-lightblue">
             Back to All
         </a>
     </div>
     <!-- Resource Interaction Btns-->
-    <div class="btn-wrapper px-5 d-flex justify-content-end align-items-center gap-3">
-        <a href="{{ route('users.edit', $user) }}" class="btn btn-outline-warning">
+    <div class="btn-wrapper d-flex justify-content-end align-items-center gap-3">
+        <a href="{{ route('users.edit', $user) }}" class="btn-lightblue">
             Edit
         </a>
-        <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal-{{ $user->id }}">
+        <button type="button" class="btn-lightblue" data-bs-toggle="modal" data-bs-target="#deleteModal-{{ $user->id }}">
             Delete
         </button>
     </div>
 </div>
 
-<div class="page-title-wrapper container pt-4 d-flex flex-column">
-    <div class="d-flex align-items-center gap-3">
-        <h4 class="page-title text-secondary mb-0 text-capitalize">
-            {{ $user->name }}
-        </h4>
-        <span class="badge {{ $user->isAdmin() ? 'bg-danger' : 'bg-primary' }}">
-            {{ ucfirst($user->role) }}
-        </span>
+<!--white bg wrapper-->
+<div class="container bg-white bg-opacity-75 rounded-3 border shadow-sm my-3 p-4">
+    <div class="page-title-wrapper pb-3 border-bottom">
+        <div class="d-flex align-items-center gap-3">
+            <h3 class="page-title text-secondary mb-0 text-capitalize">
+                {{ $user->name }}
+            </h3>
+            <span class="badge {{ $user->isAdmin() ? 'bg-danger' : 'bg-primary' }}">
+                {{ ucfirst($user->role) }}
+            </span>
+        </div>
+        <span class="text-muted d-block mt-2">{{ $user->email }}</span>
     </div>
-    <span class="text-muted mt-2">{{ $user->email }}</span>
-</div>
 
-<!-- Bio -->
-<div class="container text-justify mt-4">
-    <h6 class="text-secondary fw-bold">Bio</h6>
-    <p>{{ $user->profile?->bio ?? 'No bio available.' }}</p>
+    <!-- Bio -->
+    <div class="pt-4 text-justify">
+        <h6 class="text-secondary fw-bold mb-2">Bio</h6>
+        <p class="mb-0">{{ $user->profile?->bio ?? 'No bio available.' }}</p>
+    </div>
 </div>
 
 <!-- Modal for delete-->

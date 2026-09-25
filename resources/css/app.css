@@ -3,7 +3,26 @@
 
 /* Add any custom style */
 
+/* ===== Global ==== */
+body {
+    background-color: #eef4f8;
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+}
+
+body {
+    padding-top: 80px;
+
+}
+
 /*======= UTILS =======*/
+
+.title-color {
+    color: #2f599e;
+}
+
 .bg-light-blue {
     background-color: #93C5FD;
 }
@@ -12,14 +31,94 @@
     text-align: justify;
 }
 
-/*===== HEADER ======*/
+/* Lightblue Buttons */
 
-.glass-navbar {
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+/* Common base styles for both variants */
+.btn-lightblue,
+.btn-lightblue-sm {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    line-height: 1.4;
+    color: #f6f9fc; 
+    background-color: #85b6ff; 
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    cursor: pointer;
+    user-select: none; /* users cannot highligth text */
+    text-decoration: none;
+    
+    /* Smooth transitions */
+    transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
 }
+
+/* Standard size */
+.btn-lightblue {
+    padding: 0.625rem 1.25rem; /* 10px 20px */
+    font-size: 0.95rem;
+    border-radius: 8px;
+}
+
+/* Small size (optimized for tables and icons) */
+.btn-lightblue-sm {
+    padding: 0.3rem 0.55rem;
+    font-size: 0.825rem;
+    border-radius: 6px;
+}
+
+/* Hover state: slightly darker background, subtle lift, and brighter silver text */
+.btn-lightblue:hover,
+.btn-lightblue-sm:hover {
+    background-color: #72a5f3;
+    color: #f8fafc; /* Brighter silver */
+    box-shadow: 0 4px 10px rgba(114, 165, 243, 0.35);
+    transform: translateY(-1px);
+}
+
+/* Active state: subtle click/press effect */
+.btn-lightblue:active,
+.btn-lightblue-sm:active {
+    background-color: #729fe8;
+    transform: translateY(0) scale(0.98);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Focus state for keyboard navigation & accessibility */
+/* :focus-visible => Shows the focus ring only during keyboard navigation for accessibility */
+/* Hides the outline on mouse clicks to keep the UI clean and clutter-free */
+.btn-lightblue:focus-visible,
+.btn-lightblue-sm:focus-visible {
+    outline: 2px solid #85b6ff;
+    outline-offset: 2px;
+}
+
+/* Disabled state */
+.btn-lightblue:disabled,
+.btn-lightblue.disabled,
+.btn-lightblue-sm:disabled,
+.btn-lightblue-sm.disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+/* flowerize banners/backgrounds */
+
+.flowerized {
+    background-image: url('../images/patterns/pattern-forget-me-not.svg');
+    background-repeat: repeat;
+    background-size: 150px 150px;
+}
+
+.glass-bar {
+    background-color: rgba(255, 255, 255, 0.5) !important;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px); /* Per supporto Safari/iOS */
+    border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+/*===== HEADER ======*/
 
 .navbar-logo {
     height: 50px;
