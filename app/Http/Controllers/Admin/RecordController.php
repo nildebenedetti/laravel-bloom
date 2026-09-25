@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Emotion;
 use App\Models\Record;
+use App\Models\Tier;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -17,7 +18,7 @@ class RecordController extends Controller
      */
     public function index()
     {
-        $records = Record::all();
+        $records = Record::latest('date')->get();
 
         return view("records.index", compact("records"));
     }
@@ -29,8 +30,9 @@ class RecordController extends Controller
     {
         $categories = Category::all();
         $emotions = Emotion::all();
+        $tiers = Tier::all();
 
-        return view("records.create", compact('categories', 'emotions'));
+        return view("records.create", compact('categories', 'emotions', 'tiers'));
     }
 
     /**
@@ -46,6 +48,7 @@ class RecordController extends Controller
         $newRecord->description = $data['description'];
         $newRecord->category_id = $data['category_id'];
         $newRecord->date = $data['date'];
+        $newRecord->tier_id = $data['tier_id'];
         $newRecord->visibility = $data['visibility'];
 
 
@@ -92,9 +95,10 @@ class RecordController extends Controller
     {
         $categories = Category::all();
         $emotions = Emotion::all();
+        $tiers = Tier::all();
 
 
-        return view("records.edit", compact("record", 'categories', 'emotions'));
+        return view("records.edit", compact("record", 'categories', 'tiers', 'emotions'));
     }
 
     /**
