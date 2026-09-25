@@ -3,7 +3,6 @@
 namespace Database\Factories;
 
 use App\Models\Category;
-use App\Models\Emotion;
 use App\Models\Record;
 use App\Models\Tier;
 use App\Models\User;
@@ -28,9 +27,10 @@ class RecordFactory extends Factory
             'image_path' => $this->faker->url(),
             'image_alt' => $this->faker->sentence(),
             'visibility' => $this->faker->randomElement(['public', 'private']),
-            'category_id' => Category::all()->random()->id,
-            'tier_id' => Tier::all()->random()->id,
-            'user_id' => User::all()->random()->id,
+            // safty closure: if no resource is available, we create one on the go
+            'user_id' => fn () => User::inRandomOrder()->first()?->id ?? User::factory()->create()->id,
+            'category_id' => fn () => Category::inRandomOrder()->first()?->id ?? Category::factory()->create()->id,
+            'tier_id' => fn () => Tier::inRandomOrder()->first()?->id ?? Tier::factory()->create()->id,
         ];
     }
     // this method gets to be executed once the record is created in the factory
