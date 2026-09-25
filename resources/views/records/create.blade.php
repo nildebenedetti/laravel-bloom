@@ -27,13 +27,30 @@
                     <input required type="date" id="date" name="date">
                 </div>
                 
-                <!-- User -->
+            <!-- Tier -->
+            <div class="container">
+                <div class="form-control my-3 d-flex flex-wrap gap-3">
+                    @foreach($tiers as $tier)
+                    <div>
+                        {{-- Keeps the radio button checked if it matches previously submitted form data (old) --}}
+                        {{-- or the saved database value ($record), using '?? null' to prevent errors on the create view. --}}
+                        <input type="radio" 
+                            name="tier_id" 
+                            value="{{ $tier->id }}"
+                            id="tier-{{ $tier->id }}"
+                            class="mx-2"
+                            @checked(old('tier_id', $record->tier_id ?? null) === $tier->id)>
+                        <label for="tier-id">{{ ucwords($tier->name) }}</label>
+                    </div>
+                    @endforeach
+                </div>
+            </div>
 
                 <!-- category selection -->
                 <div class="mb-3">
                     <label for="category_id" class="form-label">Category</label>
                     <select name="category_id" id="category_id" class="form-select">
-                        <option value="">Select a category</option>
+                        <option value="">Select a Category</option>
                         @foreach($categories as $category)
                             <option value="{{ $category->id }}">
                                 {{ $category->name }}
@@ -69,7 +86,7 @@
                             value="{{ $emotion->id }}"
                             id="emotion-{{ $emotion->id }}"
                             class="mx-2">
-                            <label for="emotion{{ $emotion->id }}">{{ $emotion->name }}</label>
+                            <label for="emotion-{{ $emotion->id }}">{{ $emotion->name }}</label>
                         </div>
                         @endforeach
                     </div>

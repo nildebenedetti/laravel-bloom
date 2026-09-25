@@ -24,7 +24,7 @@
                             <a href="{{ route('admin.records.index')}}" class="nav-link">Records</a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('categories.index')}}" class="nav-link">Categories</a>
+                            <a href="{{ route('users.index')}}" class="nav-link">Categories</a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('tiers.index')}}" class="nav-link">Tiers</a>

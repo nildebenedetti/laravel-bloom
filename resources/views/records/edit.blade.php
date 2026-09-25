@@ -31,7 +31,23 @@
                     value="{{ old('date', $record->date?->format('Y-m-d')) }}">
                 </div>
                 
-                <!-- User -->
+                            <!-- Tier -->
+                <div class="container">
+                    <div class="form-control my-3 d-flex flex-wrap gap-3">
+                        @foreach($tiers as $tier)
+                        <div>
+                            {{-- Keeps the radio button checked if it matches previously submitted form data (old) --}}
+                            {{-- or the saved database value ($record), using '?? null' to prevent errors on the create view. --}}
+                            <input type="radio" 
+                                name="tier_id" 
+                                value="{{ $tier->id }}"
+                                id="tier-{{ $tier->id }}"
+                                class="mx-2"
+                                @checked(old('tier_id', $record->tier_id ?? null) === $tier->id)>
+                            <label for="tier-id">{{ ucwords($tier->name) }}</label>
+                        </div>
+                        @endforeach
+                    </div>
 
                 <!-- category selection (1:N) -->
                 <div class="mb-3">
