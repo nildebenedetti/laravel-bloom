@@ -36,9 +36,9 @@
                     <td>{{ $tier->name }}</td>
                     <td>{{ $tier->description }}</td>
                     <td>
-                        <a href="{{ route('tiers.show', $tier) }}" class="btn-lightblue"><i class="bi bi-arrow-right"></i></a> 
-                        <a href="{{ route('tiers.edit', $tier) }}" class="btn-lightblue"><i class="bi bi-pencil-fill"></i></a>
-                        <button type="button" class="btn-lightblue" data-bs-toggle="modal" data-bs-target="#deleteModal-{{ $tier->id }}">
+                        <a href="{{ route('tiers.show', $tier) }}" class="btn-lightblue-sm"><i class="bi bi-arrow-right"></i></a> 
+                        <a href="{{ route('tiers.edit', $tier) }}" class="btn-lightblue-sm"><i class="bi bi-pencil-fill"></i></a>
+                        <button type="button" class="btn-lightblue-sm" data-bs-toggle="modal" data-bs-target="#deleteModal-{{ $tier->id }}">
                             <i class="bi bi-trash3-fill"></i>
                         </button>
                     </td>

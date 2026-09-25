@@ -13,10 +13,10 @@
     </div>
     <!-- Resource Interaction Btns-->
     <div class="btn-wrapper d-flex justify-content-end align-items-center gap-3">
-        <a href="{{ route('admin.records.edit', $record ) }}" class="btn btn-outline-warning bg-white bg-opacity-75">
+        <a href="{{ route('admin.records.edit', $record ) }}" class="btn-lightblue">
             Edit
         </a>
-        <button type="button" class="btn btn-outline-danger bg-white bg-opacity-75" data-bs-toggle="modal" data-bs-target="#deleteModal-{{ $record->id }}">
+        <button type="button" class="btn-lightblue" data-bs-toggle="modal" data-bs-target="#deleteModal-{{ $record->id }}">
             Delete
         </button>
     </div>
@@ -27,19 +27,37 @@
         <h4 class="page-title text-secondary">
             {{ $record->title }}
         </h4>
-    <!-- Category-->
-    <p class="fs-5 text-muted">{{ $record->category->name}}</p>
+        <!-- Metadata Row (Author/User, Date) -->
+        <div class="d-flex align-items-baseline justify-content-between gap-3 text-muted mb-3 flex-wrap">
+            <!--- Emotion Pills-->
+            <div class="d-flex gap-2 mb-3 mt-1">
+                <span>
+                <i class="bi bi-person-circle me-1"></i>{{ $record->user?->name ?? 'Unknown User' }}
+                </span>
+                @if(count($record->emotions) > 0)
+                @foreach($record->emotions as $emotion)
+                <span class="badge rounder-pill" style="background-color:{{ $emotion->color }}">{{ $emotion->name }}</span>
+                @endforeach
+                @endif
+            </div>
+            <span>
+                <i class="bi bi-calendar3 me-1"></i>{{ $record->date->format('d/m/Y') }}
+            </span>
+    </div>
 
-    <!--- Emotion Pills-->
-    <div class="d-flex gap-2 mb-4">
-        @if(count($record->emotions) > 0)
-        @foreach($record->emotions as $emotion)
-        <span class="badge rounder-pill" style="background-color:{{ $emotion->color }}">{{ $emotion->name }}</span>
-        @endforeach
-        @endif
+    <!-- Tags (Category, Tier)-->
+    <div class="d-flex flex-wrap align-items-center gap-2 mb-2">
+        <!-- Category Badge -->
+        <span class="badge bg-primary bg-opacity-25 text-dark border">
+            <i class="bi bi-bookmark-star-fill me-1"></i>{{ $record->category->name }}
+        </span>
+        <!-- Tier Badge -->
+        <span class="badge bg-warning-subtle text-warning-emphasis border border-warning-subtle">
+            <i class="bi bi-trophy-fill me-1"></i>{{ $record->tier->name }}
+        </span>
     </div>
 </div>
-    <div class="row g-4 align-items-start pb-4">
+    <div class="row g-4 align-items-start pb-4 pt-3">
         <!-- Image -->
         @if($record->image_path)
         <div class="col-12 col-lg-4">

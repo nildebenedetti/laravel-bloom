@@ -6,8 +6,12 @@
 /* ===== Global ==== */
 body {
     background-color: #eef4f8;
-
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
 }
+
 
 /*======= UTILS =======*/
 .bg-light-blue {

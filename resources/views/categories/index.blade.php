@@ -35,9 +35,9 @@
                     <td>{{ $category->name }}</td>
                     <td>{{ $category->description }}</td>
                     <td>
-                        <a href="{{ route('categories.show', $category)}}" class="btn-lightblue"><i class="bi bi-arrow-right"></i></a> 
-                        <a href="{{ route('categories.edit', $category) }}" class="btn-lightblue"><i class="bi bi-pencil-fill"></i></a>
-                        <button type="button" class="btn-lightblue" data-bs-toggle="modal" data-bs-target="#deleteModal-{{ $category->id }}">
+                        <a href="{{ route('categories.show', $category)}}" class="btn-lightblue-sm"><i class="bi bi-arrow-right"></i></a> 
+                        <a href="{{ route('categories.edit', $category) }}" class="btn-lightblue-sm"><i class="bi bi-pencil-fill"></i></a>
+                        <button type="button" class="btn-lightblue-sm" data-bs-toggle="modal" data-bs-target="#deleteModal-{{ $category->id }}">
                             <i class="bi bi-trash3-fill"></i>
                         </button>
                     </td>
