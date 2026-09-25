@@ -31,16 +31,16 @@
                         <i class="bi bi-journal-richtext"></i>
                     </x-slot:icon>
                     <x-slot:title>Records</x-slot:title>
-                    <x-slot:description>The achievements of our users
+                    <x-slot:description>The achievements of our Community
                     </x-slot:description>
                 </x-page-access-card>
                 <!-- Categories -->
                 <x-page-access-card :route="route('categories.index')">
                     <x-slot:icon>
-                        <i class="bi bi-tag"></i>
+                        <i class="bi bi-bookmark-star-fill me-1"></i>
                     </x-slot:icon>
                     <x-slot:title>Categories</x-slot:title>
-                    <x-slot:description>The categories to which the achievements belong
+                    <x-slot:description>The areas of interest related to the achievements
                     </x-slot:description>
                 </x-page-access-card>
                 <!-- Tiers -->
@@ -58,7 +58,7 @@
                         <i class="bi bi-balloon-heart"></i>
                     </x-slot:icon>
                     <x-slot:title>Emotions</x-slot:title>
-                    <x-slot:description>How the achievement makes the User feel
+                    <x-slot:description>How our Community feels
                     </x-slot:description>
                 </x-page-access-card>
             </div>
