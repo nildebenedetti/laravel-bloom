@@ -15,7 +15,7 @@
             </div>
 
             <div class="wrapper d-flex justify-content-end">
-                <a href="{{ $route }}" class="btn-lightblue-sm">
+                <a href="{{ $route }}" class="btn-lightblue">
                     <i class="bi bi-arrow-right-short"></i>
                 </a>
             </div>
