@@ -12,6 +12,11 @@ body {
     font-style: normal;
 }
 
+body.flowerized {
+    padding-top: 80px;
+
+}
+
 /*======= UTILS =======*/
 
 .title-color {
