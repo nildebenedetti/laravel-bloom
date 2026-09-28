@@ -18,13 +18,13 @@
                             <a href="{{ route('dashboard')}}" class="nav-link">Dashboard</a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('categories.index')}}" class="nav-link">Users</a>
+                            <a href="{{ route('users.index')}}" class="nav-link">Users</a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('admin.records.index')}}" class="nav-link">Records</a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('users.index')}}" class="nav-link">Categories</a>
+                            <a href="{{ route('categories.index')}}" class="nav-link">Categories</a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('tiers.index')}}" class="nav-link">Tiers</a>
@@ -47,7 +47,7 @@
                         @endif
                     @else
                         <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 {{ Auth::user()->name }}
                             </a>
 
@@ -60,7 +60,6 @@
                                 @endif
                                 
                                 <hr class="dropdown-divider">
-
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}
                                 </a>
