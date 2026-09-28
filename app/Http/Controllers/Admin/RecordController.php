@@ -127,10 +127,12 @@ class RecordController extends Controller
 
             // for all cases we need upload
             // write new file on disk and overriding the field with the string
-            $data['image_path'] = Storage::putFile('records', $data['image_path']);
+            $data['image_path'] = Storage::putFile('records', $data->file('image_path'));
+
         } else {
         // avoid deletion of old image
         unset($data['image_path']);
+
         }
 
         $record->update($data);
@@ -154,7 +156,7 @@ class RecordController extends Controller
     {
         if($record->image) {
             
-            Storage::delete($record->image_path);
+            Storage::exists($record->image_path);
         }
         
 
