@@ -12,14 +12,14 @@ trait HttpResponse
     protected function success($data, $message = null, $code = 200) { // as props
 
         return response()->json([
-            'status' => 'Request was successfull',
-            'message' => '$message',
+
+            'status' => 'Request was successful',
+            'message' => "$message",
             'data' => $data
         ], $code );
 
     }
 
-    // error
     protected function error($data, $message = null, $code ) {
 
         return response()->json([

@@ -2,7 +2,6 @@
 
 namespace App\Http\Middleware;
 
-use App\Http\Middleware\IsAdmin;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,7 +15,7 @@ class IsAdmin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(auth()->check() && auth()->user()->isAdmin()) { // calling method defined on User model, which returns boolean value
+        if(auth()->user()->isAdmin()) { // calling method defined on User model, which returns boolean value
             return $next($request);
         }
 

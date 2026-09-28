@@ -62,13 +62,16 @@ class EmotionController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, Emotion $emotion)
-    {
-        $data = $request->all();
+{
+    $validated = $request->validate([
+        'name'  => 'required|string|max:255',
+        'color' => 'required|string|max:7'
+    ]);
 
-        $emotion->update($data);
-        
-        return redirect()->route('emotions.show', $emotion);
-    }
+    $emotion->update($validated);
+    
+    return redirect()->route('emotions.show', $emotion);
+}
 
     /**
      * Remove the specified resource from storage.

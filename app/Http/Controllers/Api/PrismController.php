@@ -16,6 +16,7 @@ class PrismController extends Controller
         $sortOrder = strtolower($request->input('order')) === 'asc' ? 'asc' : 'desc';
         
         $records = $request->user()->records()
+        ->with(['category', 'tier', 'user', 'emotions'])
         ->when($request->filled('emotions'), function ($query) use ($request) {
             $query->whereHas('emotions', function ($q) use ($request) {
                 $q->whereIn('emotions.id', (array) $request->emotions);
@@ -23,8 +24,8 @@ class PrismController extends Controller
         })
         ->orderBy('date', $sortOrder)
         ->paginate(20);
-
-        return RecordResource::collection($records->load('emotions'));
+        
+        return RecordResource::collection($records);
         
 
     }

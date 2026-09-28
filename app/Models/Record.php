@@ -23,7 +23,6 @@ class Record extends Model
     'visibility',
     'category_id',
     'tier_id',
-    'user_id',
 ];
 
     public function category() {
@@ -35,7 +34,10 @@ class Record extends Model
     }
 
     public function user() {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class)->withDefault([
+        'id'   => 0,
+        'name' => 'Unknown Author',
+    ]);
     }
 
     public function emotions() {
@@ -44,11 +46,11 @@ class Record extends Model
 
     // Automatically transforms raw database values into typed PHP objects
     // (e.g., Enums and Carbon dates).
-    // Ensures strict type safety and seamless data conversion 
+    // Ensures strict type safety and seamless data conversion
     // when reading or writing model attributes.
     protected function casts(): array
     {
-    
+
         return[
             'visibility' => RecordVisibility::class,
             'date' => 'date', // carbon library provides parsing into carbon obj
