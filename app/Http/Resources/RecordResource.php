@@ -38,8 +38,9 @@ class RecordResource extends JsonResource
                         // used by Api\MeadowController, and GET /api/blooming-meadow is
                         // registered with NO authentication middleware
                         // need to protect email in public endpoints
-                        $request->user()?->id === $this->user_id || $request->user()?->isAdmin(),
-    fn () => $this->user?->email
+                        'email' => $this->when(
+                            $request->user()?->id === $this->user_id || (bool) $request->user()?->isAdmin(), fn () => $this->user->email
+                        ),
                     ],
                 ],
         ];
