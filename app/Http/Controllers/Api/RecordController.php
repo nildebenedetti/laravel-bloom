@@ -132,23 +132,17 @@ class RecordController extends Controller
             return new RecordResource($record->load(['category', 'tier', 'user', 'emotions']));
         }
 
-        public function destroy(Record $record) {
+        public function destroy(Request $request, Record $record) {
 
              // if not authorized as record owner
-            if (Auth::user()->id !== $record->user_id) {
-                // FIXME(td-02) CRITICAL: second missing `$this->` → HTTP 500 instead of 403.
-                // Fix: return $this->error('', '…', 403);
+            if ($request->user()->id !== $record->user_id) {
+
                 return $this->error('', 'you are not authorized to delete this record', 403);
             }
 
-            // if present, delete the file from storage
-            // FIXME(td-03a) CRITICAL: same missing disk as in update() — throws for any
-            // record that actually has an image, so DELETE /api/records/{id} returns 500
-            // instead of 204. Records with no image delete fine, which is why this is
-            // invisible in a seed-data walkthrough.
-            // Fix: Storage::exists($record->image_path) on the default disk.
+
             if ( $record->image_path && Storage::disk('records')->exists($record->image_path)) {
-                Storage::disk('records')->delete($record->image_path);
+                Storage::delete($record->image_path);
             }
 
             $record->delete();
