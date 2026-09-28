@@ -10,8 +10,9 @@ use Illuminate\Http\Request;
 class MeadowController extends Controller
 {
     public function index(Request $request) { // dependency injection
-        // all records with visibility set as public
-        $records = Record::where('visibility', 'public')
+        $records = Record::qury()
+        ->with(['category', 'tier', 'user', 'emotions'])
+        ->where('visibility', RecordVisibility::PUBLIC)
         // Conditionally applies a SQL WHERE clause to filter results by 'category_id'.
         // Executes the callback only if 'category_id' is present and non-empty in the HTTP request.
         // Keeps query filtering optional without breaking the fluent Eloquent chain.
