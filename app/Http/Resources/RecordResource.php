@@ -19,11 +19,14 @@ class RecordResource extends JsonResource
             'attributes'        =>[
                 'title'             => $this->title,
                 'description'       => $this->description,
-                'date'              => $this->date,
+                'date'              => $this->date?->toDateString(),
                 'image_path'        => $this->image_path,
                 'image_alt'         => $this->image_alt,
-                'category '         => $this->category?->name, // Eloquent uses the foreign key automatically
-                'tier'              => $this->tier?->name,
+                'category'         => $this->category?->name, // Eloquent uses the foreign key automatically
+                'tier' => $this->tier ? [
+                        'id'   => $this->tier->id,
+                        'name' => $this->tier->name,
+                    ] : null,
                 'visibility'        => $this->visibility,
                 'emotions'          => EmotionResource::collection($this->whenLoaded('emotions')),
                 ],
@@ -31,7 +34,12 @@ class RecordResource extends JsonResource
                     'user'      =>   [
                         'id'         => (string)$this->user?->id,
                         'user name'  => $this->user?->name,
-                        'user email' => $this->user?->email,
+                        // This resource is also
+                        // used by Api\MeadowController, and GET /api/blooming-meadow is
+                        // registered with NO authentication middleware
+                        // need to protect email in public endpoints
+                        $request->user()?->id === $this->user_id || $request->user()?->isAdmin(),
+    fn () => $this->user?->email
                     ],
                 ],
         ];
