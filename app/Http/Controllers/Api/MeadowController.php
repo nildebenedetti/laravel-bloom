@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Enums\RecordVisibility;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\RecordResource;
 use App\Models\Record;
@@ -10,7 +11,7 @@ use Illuminate\Http\Request;
 class MeadowController extends Controller
 {
     public function index(Request $request) { // dependency injection
-        $records = Record::qury()
+        $records = Record::query()
         ->with(['category', 'tier', 'user', 'emotions'])
         ->where('visibility', RecordVisibility::PUBLIC)
         // Conditionally applies a SQL WHERE clause to filter results by 'category_id'.
