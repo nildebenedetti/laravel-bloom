@@ -287,7 +287,7 @@ data arrives ready to plot, with no client-side aggregation.
     "emotions": [{ "id": 1, "name": "Proud", "color": "#4a90d9" }]
   },
   "relationships": {
-    "user": { "id": "3", "user name": "Ophelia", "user email": "ophelia@example.com" }
+    "user": { "id": "3", "user_name": "Ophelia", "email": "ophelia@example.com" }
   }
 }
 ```

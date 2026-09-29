@@ -33,7 +33,7 @@ class RecordResource extends JsonResource
                 'relationships' => [
                     'user'      =>   [
                         'id'         => $this->user?->id,
-                        'user name'  => $this->user?->name,
+                        'user_name'  => $this->user?->name,
                         // This resource is also
                         // used by Api\MeadowController, and GET /api/blooming-meadow is
                         // registered with NO authentication middleware
