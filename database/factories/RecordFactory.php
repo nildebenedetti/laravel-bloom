@@ -24,8 +24,9 @@ class RecordFactory extends Factory
             'title' => $this->faker->unique()->sentence(),
             'description' => $this->faker->text(),
             'date' => $this->faker->date(),
-            'image_path' => $this->faker->url(),
-            'image_alt' => $this->faker->sentence(),
+            // image is optional: column is nullable, so we never fake a path
+            'image_path' => null,
+            'image_alt' => null,
             'visibility' => $this->faker->randomElement(['public', 'private']),
             // safty closure: if no resource is available, we create one on the go
             'user_id' => fn () => User::inRandomOrder()->first()?->id ?? User::factory()->create()->id,
