@@ -196,8 +196,13 @@ A `hasOne` relation, so a user has at most one profile. Created on demand by
 ### `personal_access_tokens` — Sanctum
 
 Standard Sanctum schema. `tokenable` is a morph, so the same table could hold tokens for
-any model. `expires_at` exists but **`createToken()` is never called with an expiry**, so
-every token is permanent and the `sanctum:prune-expired` daily schedule is a no-op.
+any model. `expires_at` exists but **`createToken()` is never called with an expiry**, so the
+column stays `null` and the `sanctum:prune-expired` daily schedule is a no-op.
+
+Tokens are nevertheless **not valid forever**: `config/sanctum.php` sets `expiration` to
+4320 minutes, and Sanctum's `Guard` enforces that global limit against `created_at` for every
+token. Expired tokens stop authenticating but are never removed from the table, so it grows
+without bound as users log in repeatedly.
 
 ## Framework tables
 

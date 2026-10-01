@@ -79,8 +79,8 @@ Four details are deliberate:
 
 ```php
 [
-    'status'  => 'Request was successfull',
-    'message' => $message,
+    'status'  => 'Request was successful',
+    'message' => "$message",
     'data'    => $data,
 ]
 ```
@@ -152,11 +152,10 @@ The backoffice does not use Resources — it renders Blade
   `date` column, and `visibility` arrives as a plain string, because Laravel's serializer
   unwraps `BackedEnum`. Both are unstated contract details that the SPA has to match by
   observation.
-- **The `HttpResponse` trait's `success()` always emits the literal string
-  `'$message'`** — single quotes in `app/Traits/HttpResponse.php:16` mean the nine
-  characters `$message` rather than the variable's value. Every success response from
-  `/api/login`, `/api/register` and `/api/logout` therefore has a useless `message`.
-  `error()` uses double quotes and is unaffected.
+- **The `HttpResponse` trait's `success()` interpolates `$message` with double quotes**
+  (`app/Traits/HttpResponse.php:17`), so when called without the second argument the
+  response has an empty string for `message`. `error()` uses double quotes and is
+  unaffected.
 - **`error()` declares an optional parameter before a required one** — `error($data,
   $message = null, $code)`. PHP 8 deprecates this and treats `$message` as implicitly
   required, so the signature is misleading and emits a deprecation notice on every call.

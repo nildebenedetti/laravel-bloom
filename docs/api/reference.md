@@ -63,8 +63,8 @@ curl -X POST http://localhost:8000/api/register \
 
 ```json
 {
-  "status": "Request was successfull",
-  "message": "$message",
+  "status": "Request was successful",
+  "message": "",
   "data": {
     "user": { "id": 3, "name": "Ophelia", "email": "ophelia@example.com", "role": "user" },
     "token": "3|xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
@@ -72,8 +72,9 @@ curl -X POST http://localhost:8000/api/register \
 }
 ```
 
-> `message` is the literal 9-character string `$message` — a quoting bug in
-> `app/Traits/HttpResponse.php:16`. The token and user are correct.
+> `message` is always the empty string, because `AuthController` calls `success()` without a
+> second argument and `app/Traits/HttpResponse.php:17` interpolates `$message` inside double
+> quotes. The token and user are correct.
 
 The `user` object is the model serialized directly, not a Resource. `password` and
 `remember_token` are hidden by the model's `$hidden`.
@@ -107,7 +108,8 @@ curl -X POST http://localhost:8000/api/login \
 > **No rate limiting.** Unlike the Breeze web login, this endpoint has no throttle, so
 > it is an unthrottled credential-stuffing target.
 
-A new token is created on every call. Tokens never expire.
+A new token is created on every call. **Tokens expire after 72 hours** — see
+[Token lifetime](#token-lifetime) below.
 
 ---
 
@@ -126,8 +128,8 @@ curl -X POST http://localhost:8000/api/logout \
 
 ```json
 {
-  "status": "Request was successfull",
-  "message": "$message",
+  "status": "Request was successful",
+  "message": "",
   "data": { "message": "You have successfully been logged out. Come back soon!" }
 }
 ```
@@ -146,6 +148,41 @@ curl http://localhost:8000/api/user \
 ```json
 { "id": 3, "name": "Ophelia", "email": "ophelia@example.com", "role": "user" }
 ```
+
+> **This is the only authenticated endpoint that does not use the `HttpResponse`
+> envelope.** It returns the serialized model directly, so a client that unwraps
+> `{ status, message, data }` uniformly will read `undefined` here.
+
+---
+
+## Token lifetime
+
+Tokens are **not** permanent. Sanctum applies two independent checks in
+`Guard::isValidAccessToken()` (`vendor/laravel/sanctum/src/Guard.php:128`):
+
+```php
+$isValid = (! $this->expiration || $accessToken->created_at->gt(now()->subMinutes($this->expiration)))
+         && (! $accessToken->expires_at  || ! $accessToken->expires_at->isPast());
+```
+
+| Check | Source | Value here | Applies to |
+| --- | --- | --- | --- |
+| `expiration` | `config/sanctum.php:53` | **`4320` minutes = 72 hours** | every token, **including ones already issued** |
+| `expires_at` | per-token column | always `null` | only if `createToken()` receives an expiry |
+
+Because `AuthController` calls `createToken()` without an expiry, the `expires_at` column is
+never populated and **only the global `expiration` check applies**. A token is rejected
+`created_at > 72h` after its creation, regardless of the column.
+
+**Client impact:** a returning user whose token is older than three days gets `401
+{"message":"Unauthenticated."}` on their first authenticated request, including the
+`GET /api/user` a SPA uses to restore a session. This is expected behaviour, not an outage.
+
+> **The `sanctum:prune-expired` schedule does not clean up expired tokens.** The command
+> deletes rows whose `expires_at` is in the past (`PruneExpired.php:39`), and that column is
+> never set, so the daily job in `routes/console.php:11` removes nothing. Expired tokens
+> become *invalid* but stay in the table forever. See
+> [ADR-0003](../adr/0003-sanctum-bearer-token-authentication.md).
 
 ---
 

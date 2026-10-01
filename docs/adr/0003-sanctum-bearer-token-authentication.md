@@ -65,11 +65,12 @@ Session-cookie auth is used **only** for the Blade backoffice, via the Breeze-ge
 
 - **XSS becomes token theft.** Any script that runs on the SPA's origin can read the
   token from local storage. There is no second factor.
-- **No automatic expiry on the client side.** Tokens persist until explicitly deleted.
-  The only cleanup is `Schedule::command('sanctum:prune-expired --hours=24')->daily()`
-  in `routes/console.php:11`, which only prunes tokens that have an `expires_at` in the
-  past — and `createToken()` is called without a second argument, so **no token ever
-  gets an expiry** and the prune job is a no-op.
+- **Token lifetime is global.** `config/sanctum.php` sets `expiration` to 4320 minutes
+  (72 hours). Sanctum's `Guard` enforces this global expiry against `created_at`, even
+  though `createToken()` is not called with an explicit `expiresAt` and `expires_at` remains
+  `null`. The only cleanup is `Schedule::command('sanctum:prune-expired --hours=24')->daily()`
+  in `routes/console.php:11`, which deletes only rows with an `expires_at` in the past. That
+  column is never populated here, so the scheduled command removes nothing.
 - **Two different auth stacks to reason about.** `Auth::check()` in a Blade view and
   `auth:sanctum` in a controller are backed by different mechanisms entirely. A
   developer who mixes them will get confusing, hard-to-diagnose behaviour.
@@ -91,8 +92,9 @@ Session-cookie auth is used **only** for the Blade backoffice, via the Breeze-ge
   is never registered. A reader will reasonably conclude cookie auth is in use. It is
   not.
 - **Every login mints a new token and none are ever revoked, so the
-  `personal_access_tokens` table grows without bound** and a compromised token stays
-  valid indefinitely. `prune-expired` does not help because no expiry is ever set.
+  `personal_access_tokens` table grows without bound.** `prune-expired` does not help because
+  `expires_at` is never set, so expired tokens remain in the table even though the global
+  `expiration` prevents them from authenticating.
 - **`AuthController::register()` double-encodes nothing but looks like it does.**
   It calls `Hash::make($request->password)` and `User` casts `password => 'hashed'`.
   This is *safe* — Laravel's `hashed` cast is idempotent, it checks

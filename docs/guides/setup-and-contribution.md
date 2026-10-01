@@ -113,7 +113,9 @@ Seeded admin credentials: `admin@bloom.org` / `safepsw@bloom2026`. Log in at
 php artisan sanctum:prune-expired --hours=24     # daily
 ```
 
-It is a no-op, because no token is ever created with an `expires_at`
+It currently removes nothing, because no token is ever created with an `expires_at` — the
+column this command filters on stays `null`. Tokens are still rejected after 72 hours by the
+global `expiration` in `config/sanctum.php`
 ([ADR-0003](../adr/0003-sanctum-bearer-token-authentication.md)). To run scheduled work
 locally, add to `bootstrap/app.php`:
 
