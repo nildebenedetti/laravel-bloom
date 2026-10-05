@@ -9,6 +9,7 @@ use App\Models\Emotion;
 use App\Models\Record;
 use App\Models\Tier;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class RecordController extends Controller
@@ -44,6 +45,7 @@ class RecordController extends Controller
 
         $newRecord = new Record();
 
+        $newRecord->user_id = Auth::id();
         $newRecord->title = $data['title'];
         $newRecord->description = $data['description'];
         $newRecord->category_id = $data['category_id'];
@@ -127,7 +129,7 @@ class RecordController extends Controller
 
             // for all cases we need upload
             // write new file on disk and overriding the field with the string
-            $data['image_path'] = Storage::putFile('records', $data->file('image_path'));
+            $data['image_path'] = Storage::putFile('records', $request->file('image_path'));
 
         } else {
         // avoid deletion of old image
