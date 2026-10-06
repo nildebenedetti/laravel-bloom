@@ -91,7 +91,7 @@ app/Http/Controllers/
         ▼
 app/Http/
   ├── Requests/   validation (Api\, root, Auth\)
-  ├── Resources/  serialization (RecordResource, EmotionResource)
+  ├── Resources/  serialization (RecordResource, EmotionResource, UserResource)
   └── Middleware/ IsAdmin
         │
         ▼

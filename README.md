@@ -251,7 +251,7 @@ curl -X POST http://localhost:8000/api/login \
 | `POST` | `/api/register` | — | create an account, return a token |
 | `POST` | `/api/login` | — | exchange credentials for a token |
 | `POST` | `/api/logout` | token | revoke the current token |
-| `GET` | `/api/user` | token | the authenticated user |
+| `GET` | `/api/user` | token | the authenticated user, including `bio` |
 | `GET` | `/api/blooming-meadow` | — | public feed of shared records |
 | `GET` | `/api/records` | token | caller's records, filtered and paginated |
 | `POST` | `/api/records` | token | create a record |

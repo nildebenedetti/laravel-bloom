@@ -308,7 +308,7 @@ And a checklist for the change you are actually making:
 | `app/Http/Controllers/Admin/` | 5 controllers |
 | `app/Http/Controllers/Auth/` | 9 Breeze controllers |
 | `app/Http/Requests/` | 7 Form Requests |
-| `app/Http/Resources/` | `RecordResource`, `EmotionResource` |
+| `app/Http/Resources/` | `RecordResource`, `EmotionResource`, `UserResource` |
 | `app/Http/Middleware/` | `IsAdmin` |
 | `routes/` | `api.php`, `web.php`, `auth.php` (Breeze), `console.php` |
 | `database/migrations/` | 16 migrations |

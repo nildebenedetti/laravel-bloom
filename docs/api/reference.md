@@ -138,7 +138,8 @@ curl -X POST http://localhost:8000/api/logout \
 
 ### `GET /api/user`
 
-Requires a token. Returns the raw `User` model — no Resource.
+Requires a token. Returns a `UserResource` (`app/Http/Resources/UserResource.php`) —
+flat keys, no `HttpResponse` envelope and no `data` wrapper.
 
 ```bash
 curl http://localhost:8000/api/user \
@@ -146,12 +147,24 @@ curl http://localhost:8000/api/user \
 ```
 
 ```json
-{ "id": 3, "name": "Ophelia", "email": "ophelia@example.com", "role": "user" }
+{
+  "id": 3,
+  "name": "Ophelia",
+  "email": "ophelia@example.com",
+  "role": "user",
+  "bio": "Hopeless Romantic. Love Flowers and being around kind souls.",
+  "email_verified_at": "2026-09-20T09:14:02.000000Z",
+  "created_at": "2026-09-20T09:14:02.000000Z",
+  "updated_at": "2026-09-21T11:03:45.000000Z"
+}
 ```
 
-> **This is the only authenticated endpoint that does not use the `HttpResponse`
-> envelope.** It returns the serialized model directly, so a client that unwraps
-> `{ status, message, data }` uniformly will read `undefined` here.
+- **`bio`** comes from `user_profiles.bio` via the `User::profile()` hasOne relation
+  and is `null` when the user has no profile row. It is the only key added by the
+  resource; every other key matches what the raw model used to serialize.
+- **This is the only authenticated endpoint that does not use the `HttpResponse`
+  envelope.** A client that unwraps `{ status, message, data }` uniformly will read
+  `undefined` here.
 
 ---
 
