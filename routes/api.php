@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\DashboardController;
 use App\Http\Controllers\Api\MeadowController;
 use App\Http\Controllers\Api\PrismController;
 use App\Http\Controllers\Api\RecordController;
+use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Resources\UserResource;
 use Illuminate\Http\Request;
@@ -32,6 +33,9 @@ Route::group(['as' => 'api.', 'middleware' => ['auth:sanctum'] ], function() {
 
         Route::post('/logout', [AuthController::class, 'logout']);
         Route::apiResource('/records', RecordController::class);
+        // store + update of the caller's own bio are the same operation on
+        // the hasOne profile, so one endpoint covers both
+        Route::put('/user/bio', [UserController::class, 'updateBio']);
         Route::get('/prism', [PrismController::class, 'index']);
         Route::get('/dashboard/stats', [DashboardController::class, 'stats']);
 
