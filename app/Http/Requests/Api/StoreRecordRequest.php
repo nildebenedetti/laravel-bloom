@@ -28,7 +28,7 @@ class StoreRecordRequest extends FormRequest
     {
         return [
             'title'        => ['required', 'string', 'max:200'],
-            'description'  => ['nullable', 'string'],
+            'description'  => ['required', 'string'],
             'date'         => ['required', 'date', 'date_format:Y-m-d'],
             // we need to handle the sent file instead of the image path
             'image'        => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048' ], // max iS 2048 KB = 2 MB 

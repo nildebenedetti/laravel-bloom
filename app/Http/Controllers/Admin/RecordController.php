@@ -45,8 +45,8 @@ class RecordController extends Controller
             'title'       => 'required|string|max:200',
             'description' => 'required|string',
             'date'        => 'required|date',
-            'category_id' => 'nullable|integer|exists:categories,id',
-            'tier_id'     => 'nullable|integer|exists:tiers,id',
+            'category_id' => 'required|integer|exists:categories,id',
+            'tier_id'     => 'required|integer|exists:tiers,id',
             'visibility'  => 'required|in:public,private',
             'image_path'  => 'nullable|image',
             'image_alt'   => 'nullable|string|max:255',
@@ -59,9 +59,9 @@ class RecordController extends Controller
         $newRecord->user_id = Auth::id();
         $newRecord->title = $data['title'];
         $newRecord->description = $data['description'];
-        $newRecord->category_id = $data['category_id'] ?? null;
+        $newRecord->category_id = $data['category_id'];
         $newRecord->date = $data['date'];
-        $newRecord->tier_id = $data['tier_id'] ?? null;
+        $newRecord->tier_id = $data['tier_id'];
         $newRecord->visibility = $data['visibility'];
 
 
@@ -121,8 +121,8 @@ class RecordController extends Controller
             'title'       => 'required|string|max:200',
             'description' => 'required|string',
             'date'        => 'required|date',
-            'category_id' => 'nullable|integer|exists:categories,id',
-            'tier_id'     => 'nullable|integer|exists:tiers,id',
+            'category_id' => 'required|integer|exists:categories,id',
+            'tier_id'     => 'required|integer|exists:tiers,id',
             'visibility'  => 'required|in:public,private',
             'image_path'  => 'nullable|image',
             'image_alt'   => 'nullable|string|max:255',

@@ -50,16 +50,20 @@
                                 value="{{ $tier->id }}"
                                 id="tier-{{ $tier->id }}"
                                 class="mx-2"
+                                required
                                 @checked(old('tier_id', $record->tier_id ?? null) === $tier->id)>
                             <label for="tier-id">{{ ucwords($tier->name) }}</label>
                         </div>
                         @endforeach
+                        @error('tier_id')
+                            <div class="text-danger small mt-1">{{ $message }}</div>
+                        @enderror
                     </div>
 
                 <!-- category selection (1:N) -->
                 <div class="mb-3">
                     <label for="category_id" class="form-label">Category</label>
-                    <select name="category_id" id="category_id" class="form-select @error('category_id') is-invalid @enderror">
+                    <select required name="category_id" id="category_id" class="form-select @error('category_id') is-invalid @enderror">
                         <option value="">Select a category</option>
                         @foreach($categories as $category)
                             <option value="{{ $category->id }}" 
