@@ -36,10 +36,10 @@ class RecordController extends Controller
                     });
                 })
                 ->when($request->filled('category_id'), function ($query) use ($request) {
-                    $query->where('category_id', $request->category_id);
+                    $query->whereIn('category_id', (array) $request->category_id); // whereIn and not where => WHERE category_id IN (1, 2, 3)
                 })
                 ->when($request->filled('tier_id'), function ($query) use ($request) {
-                    $query->where('tier_id', $request->tier_id);
+                    $query->whereIn('tier_id', (array) $request->tier_id);
                 })
                 ->with(['category', 'tier', 'emotions', 'user']) // Eager loads related models data (prevents N+1)
                 ->orderBy('date', $sortOrder)
@@ -91,7 +91,7 @@ class RecordController extends Controller
 
         }
 
-        public function update(UpdateRecordRequest $request, Record $record) { // as we use put we can use the same function
+        public function update(UpdateRecordRequest $request, Record $record) { 
 
             // if not authorized as record owner
             if ($request->user()->id !== $record->user_id) {

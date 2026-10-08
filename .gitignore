@@ -21,6 +21,7 @@
 /storage/*.key
 /storage/pail
 /vendor
+/studies
 _ide_helper.php
 /studies
 Homestead.json
