@@ -30,7 +30,10 @@ class EmotionController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->all();
+        $data = $request->validate([
+            'name'  => 'required|string|max:70',
+            'color' => 'required|string|max:7',
+        ]);
 
         $newEmotion = new Emotion();
 
@@ -64,7 +67,7 @@ class EmotionController extends Controller
     public function update(Request $request, Emotion $emotion)
 {
     $validated = $request->validate([
-        'name'  => 'required|string|max:255',
+        'name'  => 'required|string|max:70',
         'color' => 'required|string|max:7'
     ]);
 
