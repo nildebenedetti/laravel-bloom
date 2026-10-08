@@ -41,7 +41,18 @@ class RecordController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->all();
+        $data = $request->validate([
+            'title'       => 'required|string|max:200',
+            'description' => 'required|string',
+            'date'        => 'required|date',
+            'category_id' => 'required|integer|exists:categories,id',
+            'tier_id'     => 'required|integer|exists:tiers,id',
+            'visibility'  => 'required|in:public,private',
+            'image_path'  => 'nullable|image',
+            'image_alt'   => 'nullable|string|max:255',
+            'emotions'    => 'nullable|array',
+            'emotions.*'  => 'integer|exists:emotions,id',
+        ]);
 
         $newRecord = new Record();
 
@@ -54,13 +65,13 @@ class RecordController extends Controller
         $newRecord->visibility = $data['visibility'];
 
 
-        if(array_key_exists("image_path", $data)) {
+        if($request->hasFile('image_path')) {
 		
 						// se c`è usiamo il metodo statico Storage::putFile()
 						// con una variabile di appoggio per salvare il path
 						// creato per raggiungere il file
 						
-						$image_path = Storage::putFile('records', $data['image_path']);
+						$image_path = Storage::putFile('records', $request->file('image_path'));
 						// il primo parametro è il nome della cartella dove carichiamo le cose
 						// se la cartella ancora non esiste, viene creata
 						// il secondo parametro è il file, gli passa lárray che vedevamo prima 
@@ -68,9 +79,7 @@ class RecordController extends Controller
                         $newRecord->image_path = $image_path;
 				}
 
-        if(array_key_exists("image_alt", $data)) {
-            $newRecord->image_alt = $data['image_alt'];
-        }
+        $newRecord->image_alt = $data['image_alt'] ?? null;
 
                 $newRecord->save();
 
@@ -108,7 +117,18 @@ class RecordController extends Controller
      */
     public function update(Request $request, Record $record)
     {
-        $data = $request->all();
+        $data = $request->validate([
+            'title'       => 'required|string|max:200',
+            'description' => 'required|string',
+            'date'        => 'required|date',
+            'category_id' => 'required|integer|exists:categories,id',
+            'tier_id'     => 'required|integer|exists:tiers,id',
+            'visibility'  => 'required|in:public,private',
+            'image_path'  => 'nullable|image',
+            'image_alt'   => 'nullable|string|max:255',
+            'emotions'    => 'nullable|array',
+            'emotions.*'  => 'integer|exists:emotions,id',
+        ]);
 
         /*
         * Safely fetches the 'visibility' input from the HTTP request and attempts to convert it 

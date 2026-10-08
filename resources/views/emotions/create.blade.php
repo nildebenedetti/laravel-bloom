@@ -26,6 +26,7 @@
                 <input type="text" 
                     id="name" 
                     name="name" 
+                    maxlength="70"
                     class="form-control @error('name') is-invalid @enderror" 
                     value="{{ old('name') }}" 
                     required>
@@ -41,6 +42,7 @@
                     <input type="color" 
                         id="color" 
                         name="color" 
+                        required
                         class="form-control form-control-color @error('color') is-invalid @enderror" 
                         value="#85b6ff" 
                         title="Choose emotion color">

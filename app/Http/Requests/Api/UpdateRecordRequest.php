@@ -25,9 +25,9 @@ class UpdateRecordRequest extends FormRequest
     public function rules(): array
     {
         return [
-            // sometimes so the PATCH method knows
+            // sometimes so the PATCH method keeps old value if nothing is added here
             'title'        => ['sometimes', 'required', 'string', 'max:200'], 
-            'description'  => ['nullable', 'string'],
+            'description'  => ['sometimes', 'required', 'string'],
             'date'         => ['sometimes', 'required', 'date_format:Y-m-d'], 
             'image'        => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'], 
             'image_alt'    => ['nullable', 'string', 'max:255'],

@@ -45,17 +45,23 @@
             </span>
     </div>
 
-    <!-- Tags (Category, Tier)-->
+    <!-- Tags (Category, Tier) - mostrati solo se presenti (entrambe le colonne sono nullable) -->
+    @if($record->category || $record->tier)
     <div class="d-flex flex-wrap align-items-center gap-2 mb-2">
+        @if($record->category)
         <!-- Category Badge -->
         <span class="badge bg-primary bg-opacity-25 text-dark border">
             <i class="bi bi-bookmark-star-fill me-1"></i>{{ $record->category->name }}
         </span>
+        @endif
+        @if($record->tier)
         <!-- Tier Badge -->
         <span class="badge bg-warning-subtle text-warning-emphasis border border-warning-subtle">
             <i class="bi bi-trophy-fill me-1"></i>{{ $record->tier->name }}
         </span>
+        @endif
     </div>
+    @endif
 </div>
     <div class="row g-4 align-items-start pb-4 pt-3">
         <!-- Image -->

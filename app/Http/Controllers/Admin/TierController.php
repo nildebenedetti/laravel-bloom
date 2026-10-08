@@ -30,14 +30,12 @@ class TierController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->all();
+        $validated = $request->validate([
+            'name'        => 'required|string|max:80',
+            'description' => 'nullable|string|max:255',
+        ]);
 
-        $newTier = new Tier();
-
-        $newTier->name = $data['name'];
-        $newTier->description = $data['description'];
-
-        $newTier->save();
+        $newTier = Tier::create($validated);
 
         return redirect()->route('tiers.show', $newTier);
     }
@@ -63,7 +61,10 @@ class TierController extends Controller
      */
     public function update(Request $request, Tier $tier)
     {
-        $data = $request->all();
+        $data = $request->validate([
+            'name'        => 'required|string|max:80',
+            'description' => 'nullable|string|max:255',
+        ]);
 
         $tier->update($data);
 

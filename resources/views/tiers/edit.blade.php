@@ -20,12 +20,18 @@
                 <!-- name -->
                 <div class="col col-sm-12 d-flex flex-column">
                     <label for="title" class="pt-2">Name</label>
-                    <input required type="text" id="name" name="name" value="{{ $tier->name }}">
+                    <input required maxlength="80" type="text" id="name" name="name" value="{{ old('name', $tier->name) }}" class="form-control @error('name') is-invalid @enderror">
+                    @error('name')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                 </div>
                 <!-- description -->
                 <div class="col col-sm-12 col-md-12 col-lg-12 d-flex flex-column">
-                    <label for="description" class="py-2">Description</label>
-                    <textarea required id="description" name="description" rows="10" >{{ $tier->description }}</textarea>
+                    <label for="description" class="py-2">Description <small class="text-muted">(optional)</small></label>
+                    <textarea maxlength="255" id="description" name="description" rows="10" class="form-control @error('description') is-invalid @enderror">{{ old('description', $tier->description) }}</textarea>
+                    @error('description')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                 </div>
             </div>
             <div class="btn-wrapper d-flex justify-content-end pt-4">
