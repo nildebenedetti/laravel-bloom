@@ -19,12 +19,18 @@
                 <!-- title -->
                 <div class="col col-sm-12 d-flex flex-column">
                     <label for="title" class="pt-2">Title</label>
-                    <input required type="text" id="title" name="title">
+                    <input required maxlength="200" type="text" id="title" name="title" value="{{ old('title') }}" class="form-control @error('title') is-invalid @enderror">
+                    @error('title')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                 </div>
                 <!-- Date -->
                 <div class="col col-sm-12 d-flex flex-column">
                     <label for="date" class="pt-2">Date</label>
-                    <input required type="date" id="date" name="date">
+                    <input required type="date" id="date" name="date" value="{{ old('date') }}" class="form-control @error('date') is-invalid @enderror">
+                    @error('date')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                 </div>
                 
             <!-- Tier -->
@@ -49,14 +55,17 @@
                 <!-- category selection -->
                 <div class="mb-3">
                     <label for="category_id" class="form-label">Category</label>
-                    <select name="category_id" id="category_id" class="form-select">
+                    <select name="category_id" id="category_id" class="form-select @error('category_id') is-invalid @enderror">
                         <option value="">Select a Category</option>
                         @foreach($categories as $category)
-                            <option value="{{ $category->id }}">
+                            <option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>
                                 {{ $category->name }}
                             </option>
                         @endforeach
                     </select>
+                    @error('category_id')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <!-- image input -->
@@ -73,7 +82,10 @@
                 <!-- description -->
                 <div class="col col-sm-12 col-md-12 col-lg-12 d-flex flex-column">
                     <label for="description" class="py-2">Description</label>
-                    <textarea required id="description" name="description" rows="10" ></textarea>
+                    <textarea required id="description" name="description" rows="10" class="form-control @error('description') is-invalid @enderror">{{ old('description') }}</textarea>
+                    @error('description')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <!-- emotions -->
@@ -94,14 +106,18 @@
 
                 <!-- Visibility-->
                 <div class="col col-sm-12 col-md-12 col-lg-12 d-flex flex-column py-3">
-                        <select name="visibility" id="visibility">
+                        <select required name="visibility" id="visibility" class="form-select @error('visibility') is-invalid @enderror">
                         @foreach(\App\Enums\RecordVisibility::cases() as $visibility)
                         <option 
-                            value="{{ $visibility->value }}">
+                            value="{{ $visibility->value }}"
+                            @selected(old('visibility') === $visibility->value)>
                             {{ $visibility->label() }}
                         </option>
                         @endforeach
                     </select>
+                    @error('visibility')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                 </div>
             </div>
             <div class="btn-wrapper d-flex justify-content-end pt-4">

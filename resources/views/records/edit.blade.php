@@ -19,7 +19,10 @@
                 <!-- title -->
                 <div class="col col-sm-12 d-flex flex-column">
                     <label for="title" class="pt-2">Title</label>
-                    <input required type="text" id="title" name="title" value="{{ $record->title }}">
+                    <input required maxlength="200" type="text" id="title" name="title" value="{{ old('title', $record->title) }}" class="form-control @error('title') is-invalid @enderror">
+                    @error('title')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                 </div>
                 <!-- Date -->
                 <div class="col col-sm-12 d-flex flex-column">
@@ -28,7 +31,11 @@
                     type="date" 
                     id="date" 
                     name="date" 
+                    class="form-control @error('date') is-invalid @enderror"
                     value="{{ old('date', $record->date?->format('Y-m-d')) }}">
+                    @error('date')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                 </div>
                 
                             <!-- Tier -->
@@ -52,7 +59,7 @@
                 <!-- category selection (1:N) -->
                 <div class="mb-3">
                     <label for="category_id" class="form-label">Category</label>
-                    <select name="category_id" id="category_id" class="form-select">
+                    <select name="category_id" id="category_id" class="form-select @error('category_id') is-invalid @enderror">
                         <option value="">Select a category</option>
                         @foreach($categories as $category)
                             <option value="{{ $category->id }}" 
@@ -61,6 +68,9 @@
                             </option>
                         @endforeach
                     </select>
+                    @error('category_id')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                 </div>
 
 
@@ -83,8 +93,11 @@
 
                 <!-- description -->
                 <div class="col col-sm-12 col-md-12 col-lg-12 d-flex flex-column">
-                    <label for="description" class="py-2"></label>
-                    <textarea required id="description" name="description" rows="10" >{{ $record->description }}</textarea>
+                    <label for="description" class="py-2">Description</label>
+                    <textarea required id="description" name="description" rows="10" class="form-control @error('description') is-invalid @enderror">{{ old('description', $record->description) }}</textarea>
+                    @error('description')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <!-- emotions selection (N:N) -->
@@ -110,7 +123,7 @@
                 * Dynamically marks the option as selected if its value matches 
                 the old form input or the record's current visibility value-->
                 <div class="col col-sm-12 col-md-12 col-lg-12 d-flex flex-column py-3">
-                        <select name="visibility" id="visibility">
+                        <select required name="visibility" id="visibility" class="form-select @error('visibility') is-invalid @enderror">
                         @foreach(\App\Enums\RecordVisibility::cases() as $visibility)
                         <option 
                             value="{{ $visibility->value }}"
@@ -119,6 +132,9 @@
                         </option>
                         @endforeach
                     </select>
+                    @error('visibility')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                 </div>
             </div>
             <div class="btn-wrapper d-flex justify-content-end pt-4">

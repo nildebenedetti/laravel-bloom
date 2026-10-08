@@ -19,34 +19,49 @@
                     <!-- Name -->
                     <div class="col col-sm-12 d-flex flex-column">
                         <label for="name" class="pt-2">Name</label>
-                        <input required type="text" id="name" name="name" value="{{ old('name') }}">
+                        <input required maxlength="255" type="text" id="name" name="name" value="{{ old('name') }}" class="form-control @error('name') is-invalid @enderror">
+                        @error('name')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
 
                     <!-- Email -->
                     <div class="col col-sm-12 col-md-6 d-flex flex-column">
                         <label for="email" class="pt-2">Email</label>
-                        <input required type="email" id="email" name="email" value="{{ old('email') }}">
+                        <input required type="email" id="email" name="email" value="{{ old('email') }}" class="form-control @error('email') is-invalid @enderror">
+                        @error('email')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
 
                     <!-- Role -->
                     <div class="col col-sm-12 col-md-6 d-flex flex-column">
                         <label for="role" class="pt-2">Role</label>
-                        <select required id="role" name="role" class="form-select">
+                        <select required id="role" name="role" class="form-select @error('role') is-invalid @enderror">
                             <option value="user" {{ old('role') == 'user' ? 'selected' : '' }}>User</option>
                             <option value="admin" {{ old('role') == 'admin' ? 'selected' : '' }}>Admin</option>
                         </select>
+                        @error('role')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
 
                     <!-- Password -->
                     <div class="col col-sm-12 d-flex flex-column">
                         <label for="password" class="pt-2">Password</label>
-                        <input required type="password" id="password" name="password">
+                        <input required minlength="8" type="password" id="password" name="password" class="form-control @error('password') is-invalid @enderror">
+                        @error('password')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
 
                     <!-- Bio (Profile) -->
                     <div class="col col-sm-12 col-md-12 col-lg-12 d-flex flex-column">
-                        <label for="bio" class="py-2">Bio</label>
-                        <textarea id="bio" name="bio" rows="6">{{ old('bio') }}</textarea>
+                        <label for="bio" class="py-2">Bio <small class="text-muted">(optional)</small></label>
+                        <textarea id="bio" name="bio" rows="6" class="form-control @error('bio') is-invalid @enderror">{{ old('bio') }}</textarea>
+                        @error('bio')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
                 </div>
 
