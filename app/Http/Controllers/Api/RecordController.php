@@ -105,9 +105,9 @@ class RecordController extends Controller
             //if img is present, clean old img, store new, rewrite img_path
             if ($request->hasFile('image')) {
 
-                if ($record->image_path && Storage::disk('records')->exists($record->image_path)) {
+                if ($record->image_path && Storage::exists($record->image_path)) {
 
-                    Storage::disk('records')->delete($record->image_path);
+                    Storage::delete($record->image_path);
                     
                 }
 
@@ -141,7 +141,7 @@ class RecordController extends Controller
             }
 
 
-            if ( $record->image_path && Storage::disk('records')->exists($record->image_path)) {
+            if ( $record->image_path && Storage::exists($record->image_path)) {
                 Storage::delete($record->image_path);
             }
 
