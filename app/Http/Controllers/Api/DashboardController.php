@@ -103,7 +103,7 @@ class DashboardController extends Controller
 
             foreach($rawTImeline as $row) {
                 $month = $row->month;
-                $tierKey = 'tier_' . $row->tier;
+                $tierKey = $row->tier;
 
                 // for each first mention of a month, a group is created as a value in the array
                 // in the group, is created a key month with corresponding value
