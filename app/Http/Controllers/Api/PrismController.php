@@ -17,6 +17,7 @@ class PrismController extends Controller
         
         $records = $request->user()->records()
         ->with(['category', 'tier', 'user', 'emotions'])
+        ->whereNotNull('image_path')
         ->when($request->filled('emotions'), function ($query) use ($request) {
             $query->whereHas('emotions', function ($q) use ($request) {
                 $q->whereIn('emotions.id', (array) $request->emotions);
