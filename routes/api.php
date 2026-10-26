@@ -22,10 +22,9 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::get('/blooming-meadow', [MeadowController::class, 'index']);
 
 
-// protected routes can be grouped and potected with suth middleware
-
-// prende come parametri
+// protected routes can be grouped and potected with auth middleware
 //
+// prende come parametri:
 // 1. il middleware che vogliamo frapporre
 // 2. una callback function che chiama le rotte da inserire
 
