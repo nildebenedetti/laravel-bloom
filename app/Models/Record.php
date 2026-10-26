@@ -14,6 +14,7 @@ class Record extends Model
 
     use HasFactory;
 
+    // property for whitelisting
     protected $fillable = [
     'user_id',
     'title',
