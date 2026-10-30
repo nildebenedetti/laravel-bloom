@@ -20,13 +20,11 @@ class RecordController extends Controller
             {
                 // extract sort order from query string
                 // (es. ?order=asc o ?order=desc)
-                // strtolower is native PHP function === JS .toLowerCase()
-                // order is by def desc unless query strign sets asc
+
                 $sortOrder = strtolower($request->input('order')) === 'asc' ? 'asc' : 'desc';
 
-                $records = $request->user() // access to auth user instance
-                ->records() // access hasMany relationship method defined in user model
-                // search looks up for values in the column only if search query is present
+                $records = $request->user()
+                ->records() 
                 ->when($request->filled('search'), function ($query) use ($request) {
                     $query->where('title', 'LIKE', '%' . $request->input('search') . '%');
                 })
@@ -65,16 +63,13 @@ class RecordController extends Controller
 
             // save image if present
             if ($request->hasFile('image')) {
-                // create field to thew associative array (!!!)
-        $validated['image_path'] = $request->file('image')->store('records'); // at the same time storing file and initializing var with path!!
-            // now, I remove image from $validated associative array as we are going to store it 
-            // - the image is already saved , no need to put it elsewhere
+                // create field to the associative array (!!!)
+                $validated['image_path'] = $request->file('image')->store('records'); // at the same time storing file and initializing var with path!!
+            
                 unset($validated['image']);
             }
 
-
-            // then create a new record with user_id as request sender's
-            // and all validated field
+            // then create a new record
             $record = Record::create([
                 'user_id' => Auth::id(),
                 ...$validated,

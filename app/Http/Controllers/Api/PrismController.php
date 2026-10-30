@@ -11,8 +11,7 @@ class PrismController extends Controller
     public function index(Request $request) {
         // extraact sort order from query string
         // (es. ?order=asc o ?order=desc)
-        // strtolower is native PHP function === JS .toLowerCase()
-        // order is by def desc unless query strign sets asc
+
         $sortOrder = strtolower($request->input('order')) === 'asc' ? 'asc' : 'desc';
         
         $records = $request->user()->records()
